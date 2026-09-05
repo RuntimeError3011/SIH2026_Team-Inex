@@ -119,6 +119,20 @@
             </div>
           </li>
 
+          <li class="nav-item" onclick="scrollToRecords()">
+            <div class="nav-item-content">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"></path>
+                <line x1="8" y1="8" x2="16" y2="8"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+                <line x1="8" y1="16" x2="13" y2="16"></line>
+              </svg>
+              <span id="txtNavRecords">Patient Records</span>
+            </div>
+            <span class="badge-pill badge-sync">History</span>
+          </li>
+
+
           <li class="nav-item" onclick="openIdSyncModal()">
             <div class="nav-item-content">
               <!-- Fingerprint / ID Sync -->
@@ -320,6 +334,25 @@
             <p id="txtUtilHelpSub">Request assistance from our team</p>
           </div>
         </div>
+      </div>
+
+
+      <!-- ============ Patient Records / Medical History ============ -->
+      <div class="records-card" id="patientRecordsSection">
+        <div class="records-head">
+          <div>
+            <div class="records-title">Patient Records</div>
+            <div class="records-sub">Past visits, diagnosis and the doctor consulted</div>
+          </div>
+          <div class="records-owner">
+            <span class="records-owner-name" id="recordsOwnerName">Rahul Sharma</span>
+            <span class="records-owner-id" id="recordsOwnerId">ABHA: 91-8842-1092-4410</span>
+          </div>
+        </div>
+
+        <div class="records-filter-row" id="recordsFilterRow"></div>
+        <div class="records-list" id="recordsList"></div>
+        <div class="records-empty" id="recordsEmpty" style="display:none;">No visits found for this filter.</div>
       </div>
 
       <!-- How to Get Your Prescription Workflow Guide -->
