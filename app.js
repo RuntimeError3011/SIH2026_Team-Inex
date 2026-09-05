@@ -739,3 +739,286 @@
         currentPatientData.idValue = document.getElementById('inputPassport').value || "Z9401823A";
       }
     };
+
+    // ==========================================================================
+    // 9. FULL BILINGUAL COVERAGE ENGINE (v2)
+    // Translates EVERY visible string, including modals, dropdown options,
+    // placeholders and text created at runtime (toasts, scanner status, etc.)
+    // ==========================================================================
+    (function () {
+      const HI = {
+        // --- Top bar / shell ---
+        "MedBuddy - Smart Triage & Healthcare Kiosk": "मेडबडी - स्मार्ट ट्राइएज एवं हेल्थकेयर कियोस्क",
+        "FHIR R4 • Live": "FHIR R4 • लाइव",
+        "MedBuddy": "मेडबडी",
+
+        // --- Sidebar ---
+        "Home": "मुख्य पृष्ठ",
+        "Symptom Check": "लक्षण जांच",
+        "Prescriptions": "दवा पर्चा",
+        "New": "नया",
+        "Reports": "मेडिकल रिपोर्ट्स",
+        "Identity Sync": "पहचान सिंक",
+        "FHIR Records": "FHIR रिकॉर्ड्स",
+        "Help": "सहायता",
+        "Logout": "लॉग आउट",
+
+        // --- Alert + hero ---
+        "Severe symptom detected": "गंभीर लक्षण पाए गए",
+        "Chest pain, heavy bleeding or breathing trouble — tell a nurse now, don't wait for your turn.": "सीने में दर्द, अत्यधिक रक्तस्राव या सांस लेने में परेशानी — तुरंत नर्स को बताएं, अपनी बारी का इंतज़ार न करें।",
+        "Call staff": "स्टाफ को बुलाएं",
+        "Speak or tap to begin": "बोलें या शुरू करने के लिए टैप करें",
+        "Tell us what's bothering you today": "बताएं आज आपको क्या परेशानी है",
+        "Head": "सिर (Head)",
+        "Chest": "सीना (Chest)",
+        "Stomach": "पेट (Stomach)",
+        "Body pain": "बदन दर्द (Body Pain)",
+
+        // --- Utility cards ---
+        "Scan report": "रिपोर्ट स्कैन करें",
+        "Upload or scan medical documents": "मेडिकल दस्तावेज अपलोड या स्कैन करें",
+        "ID Sync": "पहचान सिंक",
+        "ABHA • Aadhaar • Passport": "आभा • आधार • पासपोर्ट",
+        "Securely link verified health records": "सत्यापित स्वास्थ्य रिकॉर्ड सुरक्षित लिंक करें",
+        "Help from staff": "स्टाफ से सहायता लें",
+        "Request assistance from our team": "हमारी स्वास्थ्य टीम से सहायता का अनुरोध करें",
+
+        // --- Flow / disclaimer ---
+        "How to get your prescription": "अपना दवा पर्चा कैसे प्राप्त करें",
+        "Scan the QR code at the pharmacy or clinic": "फार्मेसी या क्लिनिक में क्यूआर कोड स्कैन करें",
+        "Your prescription will appear instantly": "आपका दवा पर्चा तुरंत स्क्रीन पर दिखाई देगा",
+        "Follow the schedule and set reminders if needed": "समय-सारणी का पालन करें और आवश्यकता पड़ने पर रिमाइंडर लगाएं",
+        "This kiosk is for guidance only and not a substitute for professional medical advice.": "यह कियोस्क केवल मार्गदर्शन के लिए है और पेशेवर चिकित्सा सलाह का विकल्प नहीं है।",
+        "In emergencies, contact staff immediately.": "आपात स्थिति में तुरंत अस्पताल स्टाफ से संपर्क करें।",
+
+        // --- Prescription card ---
+        "Prescription Details": "दवा पर्चे का विवरण",
+        "Verified": "सत्यापित",
+        "Patient": "मरीज का नाम",
+        "Patient:": "मरीज का नाम:",
+        "Prescription ID": "पर्चा संख्या (RX ID)",
+        "Prescribed on": "परामर्श तिथि",
+        "Prescribed by": "परामर्शदाता डॉक्टर",
+        "View full prescription": "पूरा पर्चा देखें",
+        "Medicines & Schedule": "दवाइयां और समय-सारणी",
+        "Set reminder": "रिमाइंडर लगाएं",
+        "Reminders ON": "रिमाइंडर चालू",
+        "1 tablet": "1 गोली",
+        "1 capsule": "1 कैप्सूल",
+        "1 tab": "1 गोली",
+        "1 cap": "1 कैप्सूल",
+        "After Food": "भोजन के बाद",
+        "Before Food": "भोजन से पहले",
+        "☀️ Daily": "☀️ प्रतिदिन",
+        "Duration": "अवधि",
+        "5 Days": "5 दिन",
+        "Notes": "निर्देश",
+        "Complete the full course of medicine. Drink plenty of warm water and avoid heavy greasy meals.": "दवाइयों का पूरा कोर्स अवश्य समाप्त करें। गुनगुना पानी पिएं और गरिष्ठ व तैलीय भोजन से परहेज करें।",
+
+        // --- Voice triage modal ---
+        "MedBuddy AI Voice Triage": "मेडबडी एआई वॉइस ट्राइएज",
+        "Listening to your voice... Speak clearly into the kiosk microphone.": "आपकी आवाज़ सुनी जा रही है... कृपया कियोस्क माइक्रोफोन में स्पष्ट बोलें।",
+        "Live Speech Transcription:": "लाइव वाणी प्रतिलेखन:",
+        "\"I've been feeling a dull ache in the lower abdomen and slight fever since last night...\"": "\"कल रात से पेट के निचले हिस्से में हल्का दर्द और हल्का बुखार महसूस हो रहा है...\"",
+        "\"Chest congestion\"": "\"छाती में जकड़न\"",
+        "\"Throbbing headache\"": "\"तेज़ सिरदर्द\"",
+        "\"Knee & joint pain\"": "\"घुटने और जोड़ों का दर्द\"",
+        "Analyze Symptoms with MedBuddy AI": "मेडबडी एआई से लक्षणों का विश्लेषण करें",
+        "\"Chest congestion and wheezing\"": "\"छाती में जकड़न और सांस में सीटी जैसी आवाज़\"",
+        "\"Severe headache and sensitivity to bright light\"": "\"तेज़ सिरदर्द और तेज़ रोशनी से परेशानी\"",
+        "\"Sharp knee joint pain after morning jog\"": "\"सुबह दौड़ने के बाद घुटने के जोड़ में तेज़ दर्द\"",
+
+        // --- Identity sync modal ---
+        "Sync Patient Identity": "मरीज की पहचान सिंक करें",
+        "Connect health accounts and prescriptions securely using your preferred national or international ID.": "अपनी पसंदीदा राष्ट्रीय या अंतरराष्ट्रीय पहचान का उपयोग कर स्वास्थ्य खाते और पर्चे सुरक्षित रूप से जोड़ें।",
+        "🩺 ABHA ID": "🩺 आभा आईडी",
+        "🇮🇳 Aadhaar Card": "🇮🇳 आधार कार्ड",
+        "🛂 Passport (NRI)": "🛂 पासपोर्ट (एनआरआई)",
+        "14-Digit ABHA Number or ABHA Address": "14 अंकों का आभा नंबर या आभा पता",
+        "Authentication Method": "प्रमाणीकरण विधि",
+        "Mobile OTP Verification": "मोबाइल ओटीपी सत्यापन",
+        "Aadhaar OTP via ABDM": "एबीडीएम के माध्यम से आधार ओटीपी",
+        "Biometric Match": "बायोमेट्रिक मिलान",
+        "OTP (6 Digits)": "ओटीपी (6 अंक)",
+        "Verify & Link ABHA Records": "आभा रिकॉर्ड सत्यापित कर जोड़ें",
+        "12-Digit Aadhaar UID Number": "12 अंकों का आधार यूआईडी नंबर",
+        "Place finger on kiosk glass scanner": "कियोस्क के ग्लास स्कैनर पर उंगली रखें",
+        "UIDAI RD Service 2.0 Ready": "यूआईडीएआई आरडी सेवा 2.0 तैयार",
+        "Authenticate via Aadhaar Biometrics": "आधार बायोमेट्रिक से प्रमाणित करें",
+        "Passport Number": "पासपोर्ट नंबर",
+        "Issuing Country": "जारीकर्ता देश",
+        "India (NRI)": "भारत (एनआरआई)",
+        "United Kingdom": "यूनाइटेड किंगडम",
+        "United States": "संयुक्त राज्य अमेरिका",
+        "Singapore": "सिंगापुर",
+        "Australia": "ऑस्ट्रेलिया",
+        "Patient Full Name": "मरीज का पूरा नाम",
+        "✓ MRZ Optical Code Verified": "✓ एमआरजेड ऑप्टिकल कोड सत्यापित",
+        "Link International Health Passport": "अंतरराष्ट्रीय हेल्थ पासपोर्ट जोड़ें",
+        "Scanning biometric fingerprint...": "बायोमेट्रिक फिंगरप्रिंट स्कैन हो रहा है...",
+        "✓ Biometric Match 99.4% Verified": "✓ बायोमेट्रिक मिलान 99.4% सत्यापित",
+
+        // --- Emergency modal ---
+        "Emergency Assistance Dispatched": "आपातकालीन सहायता भेजी गई",
+        "A Nurse is on the way to Kiosk #03": "एक नर्स कियोस्क #03 की ओर आ रही हैं",
+        "Emergency triage alerted:": "आपातकालीन ट्राइएज को सूचित किया गया:",
+        "Nurse Preeti S. (Triage Station 4)": "नर्स प्रीति एस. (ट्राइएज स्टेशन 4)",
+        "has received your alert. Estimated arrival in": "ने आपकी सूचना प्राप्त कर ली है। अनुमानित पहुंच समय",
+        "• Please remain seated at this kiosk.": "• कृपया इसी कियोस्क पर बैठे रहें।",
+        "• If you have severe chest pressure or shortness of breath, let bystanders know immediately.": "• यदि सीने में तेज़ दबाव या सांस लेने में कठिनाई हो तो आसपास मौजूद लोगों को तुरंत बताएं।",
+        "Dismiss Alert": "सूचना बंद करें",
+        "Staff has arrived at kiosk.": "स्टाफ कियोस्क पर पहुंच गया है।",
+
+        // --- Reports modal ---
+        "Medical Reports & Diagnostics Center": "मेडिकल रिपोर्ट्स एवं जांच केंद्र",
+        "Current Reports (सक्रिय रिपोर्ट्स)": "मरीज की वर्तमान जांच रिपोर्ट्स",
+        "✓ ABDM Synced • 3 Records Active": "✓ एबीडीएम सिंक • 3 रिकॉर्ड सक्रिय",
+        "Complete Blood Count (CBC) & Lipid Profile": "कम्पलीट ब्लड काउंट (सीबीसी) एवं लिपिड प्रोफाइल",
+        "✓ Normal": "✓ सामान्य",
+        "✓ Controlled": "✓ नियंत्रित",
+        "✓ Cleared": "✓ सामान्य पाया गया",
+        "Fasting Blood Glucose & HbA1c Glycated": "फास्टिंग ब्लड ग्लूकोज एवं एचबीए1सी",
+        "Digital Chest X-Ray (PA View - Bilateral)": "डिजिटल चेस्ट एक्स-रे (पीए व्यू - द्विपक्षीय)",
+        "Clear Bilateral Lung Fields": "दोनों फेफड़े स्पष्ट",
+        "Cardiothoracic Ratio: Normal": "कार्डियोथोरेसिक अनुपात: सामान्य",
+        "View": "देखें",
+        "Scan or Upload New Medical Document": "नया मेडिकल दस्तावेज स्कैन या अपलोड करें",
+        "Place paper report face down on glass scanner or tap to upload": "कागज़ी रिपोर्ट को स्कैनर के कांच पर उल्टा रखें या अपलोड करने के लिए टैप करें",
+        "Supports Prescriptions, Blood Tests, X-Rays, Discharge Summaries": "पर्चे, ब्लड टेस्ट, एक्स-रे और डिस्चार्ज सारांश समर्थित हैं",
+        "Start Instant Kiosk Scanner": "कियोस्क स्कैनर शुरू करें",
+        "Laser scanning paper document...": "दस्तावेज़ लेजर से स्कैन हो रहा है...",
+        "Document Successfully Digitized": "दस्तावेज़ सफलतापूर्वक डिजिटल किया गया",
+        "✓ Document OCR Extraction Complete & Added to Current Reports:": "✓ दस्तावेज़ से जानकारी निकाली गई और वर्तमान रिपोर्ट्स में जोड़ी गई:",
+        "• Diagnostic: Complete Blood Count (CBC) & Lipid Profile": "• जांच: कम्पलीट ब्लड काउंट (सीबीसी) एवं लिपिड प्रोफाइल",
+        "• Hemoglobin: 14.2 g/dL (Normal)": "• हीमोग्लोबिन: 14.2 g/dL (सामान्य)",
+        "• Fasting Blood Glucose: 98 mg/dL (Normal)": "• फास्टिंग ब्लड ग्लूकोज: 98 mg/dL (सामान्य)",
+        "• Uploaded directly to ABDM Health Locker.": "• सीधे एबीडीएम हेल्थ लॉकर में अपलोड किया गया।",
+        "FBS: 98 mg/dL (Normal)": "एफबीएस: 98 mg/dL (सामान्य)",
+
+        // --- Full prescription modal ---
+        "Digital Outpatient Prescription (e-Rx)": "डिजिटल ओपीडी दवा पर्चा (ई-आरएक्स)",
+        "CITY GENERAL HOSPITAL & CLINICS": "सिटी जनरल हॉस्पिटल एवं क्लिनिक्स",
+        "Department of Internal Medicine • New Delhi": "आंतरिक चिकित्सा विभाग • नई दिल्ली",
+        "Age/Sex:": "आयु/लिंग:",
+        "32 / Male": "32 / पुरुष",
+        "Synced ID:": "जुड़ी हुई पहचान:",
+        "ABHA / Aadhaar": "आभा / आधार",
+        "Rx (Prescribed Medications):": "आरएक्स (निर्धारित दवाइयां):",
+        "Medicine": "दवा",
+        "Dosage": "मात्रा",
+        "Frequency": "आवृत्ति",
+        "Timing": "समय",
+        "Digitally generated via MedBuddy Kiosk.": "मेडबडी कियोस्क द्वारा डिजिटल रूप से तैयार।",
+        "Compliant with ABDM & NDHM Healthcare Standards.": "एबीडीएम एवं एनडीएचएम स्वास्थ्य मानकों के अनुरूप।",
+        "[Digitally Signed by Doctor]": "[डॉक्टर द्वारा डिजिटल हस्ताक्षरित]",
+        "Print Prescription": "पर्चा प्रिंट करें",
+        "Export FHIR JSON": "FHIR JSON निर्यात करें",
+        "Send to Mobile": "मोबाइल पर भेजें",
+
+        // --- FHIR hub ---
+        "HL7 FHIR Release 4 (R4) Interoperability Hub": "एचएल7 FHIR रिलीज़ 4 (R4) इंटरऑपरेबिलिटी हब",
+        "ABDM & HL7 Compliant Kiosk Exchange Protocol": "एबीडीएम एवं एचएल7 अनुरूप कियोस्क विनिमय प्रोटोकॉल",
+        "Test Ping": "कनेक्शन जांचें",
+        "Bundle (All)": "बंडल (सभी)",
+        "Condition (Triage)": "कंडीशन (ट्राइएज)",
+        "Encounter": "एनकाउंटर",
+        "● Ready to exchange HL7 FHIR R4 Bundle over HTTPS": "● एचटीटीपीएस के माध्यम से FHIR R4 बंडल भेजने के लिए तैयार",
+        "REST API: JSON (application/fhir+json)": "REST एपीआई: JSON (application/fhir+json)",
+        "Transmit POST to FHIR Server": "FHIR सर्वर पर भेजें",
+        "Download .json": ".json डाउनलोड करें",
+        "Copy JSON": "JSON कॉपी करें",
+
+        // --- Toasts & runtime messages ---
+        "AI Triage completed: Categorized under General Medicine OPD.": "एआई ट्राइएज पूर्ण: सामान्य चिकित्सा ओपीडी में वर्गीकृत।",
+        "Opening freshly scanned lab report.": "नई स्कैन की गई लैब रिपोर्ट खोली जा रही है।",
+        "Medical report linked and added to Current Reports!": "मेडिकल रिपोर्ट जोड़ दी गई और वर्तमान रिपोर्ट्स में शामिल कर दी गई!",
+        "Medication alarms scheduled for 08:00 AM, 02:00 PM, 08:00 PM.": "दवा के रिमाइंडर सुबह 08:00, दोपहर 02:00 और रात 08:00 बजे के लिए सेट किए गए।",
+        "Medication reminders muted.": "दवा रिमाइंडर बंद कर दिए गए।",
+        "Downloaded standard HL7 FHIR R4 Bundle.": "मानक एचएल7 FHIR R4 बंडल डाउनलोड हो गया।",
+        "FHIR JSON copied to clipboard.": "FHIR JSON क्लिपबोर्ड में कॉपी हो गया।",
+        "FHIR JSON copied.": "FHIR JSON कॉपी हो गया।",
+        "FHIR R4 Bundle successfully posted to server!": "FHIR R4 बंडल सर्वर पर सफलतापूर्वक भेज दिया गया!"
+      };
+
+      // Patterns for strings that contain numbers/names that change at runtime.
+      const PATTERNS = [
+        [/^(\d+) seconds$/, (m) => `${m[1]} सेकंड`],
+        [/^Synced successfully via (.+) ID\.$/, (m) => `${m[1]} पहचान से सफलतापूर्वक सिंक हो गया।`],
+        [/^FHIR Server responding in (\d+)ms\.$/, (m) => `FHIR सर्वर ${m[1]}ms में उत्तर दे रहा है।`],
+        [/^● Pinging (.+) \(CapabilityStatement\)\.\.\.$/, (m) => `● ${m[1]} से संपर्क किया जा रहा है (CapabilityStatement)...`],
+        [/^● Transmitting FHIR Transaction Bundle \[POST (.+)\]\.\.\.$/, (m) => `● FHIR ट्रांजैक्शन बंडल भेजा जा रहा है [POST ${m[1]}]...`],
+        [/^"Patient reports discomfort in the (.+) region\."$/, (m) => `"मरीज ने ${HI[m[1]] || m[1]} क्षेत्र में परेशानी बताई है।"`]
+      ];
+
+      // Placeholders (attributes cannot be reached by the text-node walker).
+      const PLACEHOLDERS = {
+        "e.g. rahul.sharma@abdm or 91-xxxx-xxxx-xxxx": "उदा. rahul.sharma@abdm या 91-xxxx-xxxx-xxxx",
+        "XXXX XXXX XXXX": "XXXX XXXX XXXX",
+        "e.g. Z9401823A": "उदा. Z9401823A"
+      };
+
+      function toHindi(text) {
+        const key = text.trim();
+        if (!key) return null;
+        if (HI[key]) return text.replace(key, HI[key]);
+        for (const [re, fn] of PATTERNS) {
+          const m = key.match(re);
+          if (m) return text.replace(key, fn(m));
+        }
+        return null;
+      }
+
+      // Public helper: translate any runtime string before showing it.
+      window.tt = function (text) {
+        if (currentLanguage !== 'hi' || typeof text !== 'string') return text;
+        return toHindi(text) || text;
+      };
+
+      let busy = false;
+
+      function translateNode(node, lang) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          if (node.__enText === undefined) node.__enText = node.nodeValue;
+          if (lang === 'hi') {
+            const hi = toHindi(node.__enText);
+            if (hi !== null && node.nodeValue !== hi) node.nodeValue = hi;
+          } else if (node.nodeValue !== node.__enText) {
+            node.nodeValue = node.__enText;
+          }
+          return;
+        }
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+        const tag = node.tagName;
+        if (tag === 'SCRIPT' || tag === 'STYLE' || node.classList.contains('code-viewer')) return;
+        if (node.placeholder && PLACEHOLDERS[node.__enPlaceholder || node.placeholder]) {
+          if (node.__enPlaceholder === undefined) node.__enPlaceholder = node.placeholder;
+          node.placeholder = lang === 'hi' ? PLACEHOLDERS[node.__enPlaceholder] : node.__enPlaceholder;
+        }
+        node.childNodes.forEach((child) => translateNode(child, lang));
+      }
+
+      function applyLanguage(lang) {
+        busy = true;
+        translateNode(document.body, lang);
+        busy = false;
+      }
+
+      // Re-translate anything the app injects later (new report cards, toasts...).
+      new MutationObserver((records) => {
+        if (busy || currentLanguage !== 'hi') return;
+        busy = true;
+        records.forEach((r) => {
+          r.addedNodes.forEach((n) => translateNode(n, 'hi'));
+          if (r.type === 'characterData') translateNode(r.target, 'hi');
+        });
+        busy = false;
+      }).observe(document.body, { childList: true, subtree: true, characterData: true });
+
+      // Wrap the original language switcher so both engines run together.
+      const originalSwitch = switchLanguage;
+      switchLanguage = function (lang) {
+        if (!translations[lang]) return;
+        originalSwitch(lang);
+        applyLanguage(lang);
+      };
+    })();
