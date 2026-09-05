@@ -745,6 +745,240 @@
     // Translates EVERY visible string, including modals, dropdown options,
     // placeholders and text created at runtime (toasts, scanner status, etc.)
     // ==========================================================================
+    /* ==========================================================================
+       PATIENT RECORDS — medical history with the doctor consulted at each visit
+       ========================================================================== */
+    const patientRecords = [
+      {
+        id: 'VIS-2026-0412',
+        date: '2026-08-21',
+        dateLabel: '21 Aug',
+        department: 'General Medicine',
+        doctor: 'Dr. Anjali Verma',
+        doctorQual: 'MBBS, MD (General Medicine) • Reg #48291',
+        facility: 'City General Hospital, OPD-2',
+        diagnosis: 'Acute viral pharyngitis with fever',
+        complaint: 'Sore throat, body ache and fever for 3 days',
+        vitals: 'BP 124/82 • Pulse 92 • Temp 101.2°F • SpO2 98%',
+        medicines: ['Paracetamol 650mg — 1 tablet, three times a day, 3 days', 'Azithromycin 500mg — 1 tablet daily, 3 days', 'Warm saline gargle — twice daily'],
+        tests: 'CBC, CRP',
+        notes: 'Advised rest and fluids. Review if fever persists beyond 3 days.',
+        status: 'Active'
+      },
+      {
+        id: 'VIS-2026-0233',
+        date: '2026-05-09',
+        dateLabel: '09 May',
+        department: 'Cardiology',
+        doctor: 'Dr. Rakesh Nair',
+        doctorQual: 'MBBS, DM (Cardiology) • Reg #21774',
+        facility: 'City General Hospital, Cardiac OPD',
+        diagnosis: 'Palpitations — no structural abnormality',
+        complaint: 'Occasional chest fluttering after exertion',
+        vitals: 'BP 132/86 • Pulse 88 • ECG: Sinus rhythm',
+        medicines: ['Metoprolol 25mg — half tablet at night, 30 days'],
+        tests: 'ECG, 2D Echo, Thyroid profile',
+        notes: 'Echo normal. Reduce caffeine. Follow-up after 6 months.',
+        status: 'Follow-up'
+      },
+      {
+        id: 'VIS-2025-1187',
+        date: '2025-12-02',
+        dateLabel: '02 Dec',
+        department: 'Gastroenterology',
+        doctor: 'Dr. Meera Iyer',
+        doctorQual: 'MBBS, MD, DNB (Gastroenterology) • Reg #33902',
+        facility: 'Sunrise Diagnostics & Clinic',
+        diagnosis: 'Acid peptic disease (GERD)',
+        complaint: 'Burning in upper abdomen, worse at night',
+        vitals: 'BP 120/78 • Pulse 76 • Weight 71 kg',
+        medicines: ['Pantoprazole 40mg — 1 tablet before breakfast, 14 days', 'Antacid gel — 10ml at bedtime'],
+        tests: 'USG Abdomen, H. pylori test',
+        notes: 'Avoid late dinners and spicy food. Symptoms resolved on review.',
+        status: 'Closed'
+      },
+      {
+        id: 'VIS-2025-0741',
+        date: '2025-07-18',
+        dateLabel: '18 Jul',
+        department: 'Orthopaedics',
+        doctor: 'Dr. Sandeep Kulkarni',
+        doctorQual: 'MBBS, MS (Orthopaedics) • Reg #50118',
+        facility: 'City General Hospital, Ortho OPD',
+        diagnosis: 'Lower back strain (lumbar)',
+        complaint: 'Back pain after lifting heavy weight',
+        vitals: 'BP 118/76 • Pulse 74 • SLR test negative',
+        medicines: ['Aceclofenac 100mg — twice daily after food, 5 days', 'Calcium + Vitamin D3 — once daily, 30 days'],
+        tests: 'X-ray Lumbar Spine',
+        notes: 'Physiotherapy for 2 weeks. No lifting above 10 kg.',
+        status: 'Closed'
+      },
+      {
+        id: 'VIS-2024-0956',
+        date: '2024-11-04',
+        dateLabel: '04 Nov',
+        department: 'General Medicine',
+        doctor: 'Dr. Anjali Verma',
+        doctorQual: 'MBBS, MD (General Medicine) • Reg #48291',
+        facility: 'City General Hospital, OPD-2',
+        diagnosis: 'Annual health check — mild anaemia',
+        complaint: 'Routine check-up, tiredness',
+        vitals: 'BP 122/80 • Pulse 78 • Hb 11.4 g/dL',
+        medicines: ['Ferrous ascorbate 100mg — once daily, 60 days'],
+        tests: 'CBC, Lipid profile, HbA1c',
+        notes: 'Iron-rich diet advised. Repeat Hb after 2 months.',
+        status: 'Closed'
+      }
+    ];
+    window.patientRecords = patientRecords;
+
+    let recordsFilter = 'All';
+
+    function recordStatusClass(status) {
+      if (status === 'Closed') return 'tag-closed';
+      if (status === 'Follow-up') return 'tag-followup';
+      return 'tag-active';
+    }
+
+    function renderPatientRecords() {
+      const list = document.getElementById('recordsList');
+      const empty = document.getElementById('recordsEmpty');
+      const filterRow = document.getElementById('recordsFilterRow');
+      if (!list || !filterRow) return;
+
+      // Keep the header in sync with the patient loaded in the kiosk.
+      const nameEl = document.getElementById('displayPatientName');
+      const idEl = document.getElementById('displayPatientId');
+      const ownerName = document.getElementById('recordsOwnerName');
+      const ownerId = document.getElementById('recordsOwnerId');
+      if (nameEl && ownerName) ownerName.textContent = nameEl.textContent.trim();
+      if (idEl && ownerId) ownerId.textContent = idEl.textContent.split('•')[0].trim();
+
+      const departments = ['All'].concat(
+        patientRecords.map((r) => r.department).filter((d, i, a) => a.indexOf(d) === i)
+      );
+      filterRow.innerHTML = departments
+        .map(
+          (d) =>
+            `<button class="records-chip${d === recordsFilter ? ' active' : ''}" onclick="filterPatientRecords('${d}')">${d}</button>`
+        )
+        .join('');
+
+      const rows = patientRecords.filter((r) => recordsFilter === 'All' || r.department === recordsFilter);
+      if (empty) empty.style.display = rows.length ? 'none' : 'block';
+
+      list.innerHTML = rows
+        .map(
+          (r) => `
+        <div class="record-item" id="rec-${r.id}">
+          <div class="record-row" onclick="toggleRecord('${r.id}')">
+            <div class="record-date">
+              <span class="record-date-day">${r.dateLabel}</span>
+              <span class="record-date-year">${r.date.slice(0, 4)} • ${r.id}</span>
+            </div>
+            <div class="record-main">
+              <div class="record-diagnosis">${r.diagnosis}</div>
+              <div class="record-doctor"><span>Consulted</span> <strong>${r.doctor}</strong> • <span>${r.department}</span> • <span>${r.facility}</span></div>
+            </div>
+            <span class="record-tag ${recordStatusClass(r.status)}">${r.status}</span>
+            <span class="record-caret">▾</span>
+          </div>
+          <div class="record-detail">
+            <div class="record-detail-grid">
+              <div>
+                <div class="record-field-label">Complaint</div>
+                <div class="record-field-value">${r.complaint}</div>
+              </div>
+              <div>
+                <div class="record-field-label">Vitals recorded</div>
+                <div class="record-field-value">${r.vitals}</div>
+              </div>
+              <div>
+                <div class="record-field-label">Doctor</div>
+                <div class="record-field-value">${r.doctor}<br><span style="color:var(--text-dim);font-size:11.5px">${r.doctorQual}</span></div>
+              </div>
+              <div>
+                <div class="record-field-label">Tests advised</div>
+                <div class="record-field-value">${r.tests}</div>
+              </div>
+              <div>
+                <div class="record-field-label">Medicines prescribed</div>
+                <ul class="record-meds">${r.medicines.map((m) => `<li>${m}</li>`).join('')}</ul>
+              </div>
+              <div>
+                <div class="record-field-label">Doctor's notes</div>
+                <div class="record-field-value">${r.notes}</div>
+              </div>
+            </div>
+          </div>
+        </div>`
+        )
+        .join('');
+    }
+
+    function toggleRecord(id) {
+      playBeep(600, 0.04);
+      const el = document.getElementById('rec-' + id);
+      if (el) el.classList.toggle('open');
+    }
+
+    function filterPatientRecords(dept) {
+      playBeep(520, 0.04);
+      recordsFilter = dept;
+      renderPatientRecords();
+    }
+
+    function scrollToRecords() {
+      playBeep(600, 0.05);
+      const el = document.getElementById('patientRecordsSection');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderPatientRecords);
+    if (document.readyState !== 'loading') renderPatientRecords();
+
+    // Hindi strings for the records section (merged into the translation engine).
+    window.MB_RECORDS_HI = {
+      "Patient Records": "मरीज़ के रिकॉर्ड",
+      "Consulted": "परामर्श लिया",
+      "City General Hospital, OPD-2": "सिटी जनरल हॉस्पिटल, ओपीडी-2",
+      "City General Hospital, Cardiac OPD": "सिटी जनरल हॉस्पिटल, हृदय ओपीडी",
+      "City General Hospital, Ortho OPD": "सिटी जनरल हॉस्पिटल, हड्डी ओपीडी",
+      "Sunrise Diagnostics & Clinic": "सनराइज़ डायग्नोस्टिक्स एवं क्लिनिक",
+      "History": "इतिहास",
+      "Past visits, diagnosis and the doctor consulted": "पिछली विज़िट, निदान और परामर्श देने वाले डॉक्टर",
+      "All": "सभी",
+      "General Medicine": "सामान्य चिकित्सा",
+      "Cardiology": "हृदय रोग विभाग",
+      "Gastroenterology": "पेट रोग विभाग",
+      "Orthopaedics": "हड्डी रोग विभाग",
+      "Active": "चालू",
+      "Follow-up": "फॉलो-अप",
+      "Closed": "पूर्ण",
+      "Complaint": "शिकायत",
+      "Vitals recorded": "दर्ज वाइटल्स",
+      "Doctor": "डॉक्टर",
+      "Tests advised": "सुझाई गई जांचें",
+      "Medicines prescribed": "लिखी गई दवाइयाँ",
+      "Doctor's notes": "डॉक्टर की टिप्पणी",
+      "No visits found for this filter.": "इस फ़िल्टर के लिए कोई विज़िट नहीं मिली।",
+      "Acute viral pharyngitis with fever": "बुखार के साथ वायरल गले का संक्रमण",
+      "Sore throat, body ache and fever for 3 days": "3 दिन से गले में खराश, बदन दर्द और बुखार",
+      "Palpitations — no structural abnormality": "धड़कन तेज़ होना — हृदय में कोई संरचनात्मक खराबी नहीं",
+      "Occasional chest fluttering after exertion": "मेहनत के बाद कभी-कभी सीने में धड़कन महसूस होना",
+      "Acid peptic disease (GERD)": "एसिडिटी / पेट में जलन (GERD)",
+      "Burning in upper abdomen, worse at night": "ऊपरी पेट में जलन, रात में अधिक",
+      "Lower back strain (lumbar)": "कमर के निचले हिस्से में खिंचाव",
+      "Back pain after lifting heavy weight": "भारी वजन उठाने के बाद कमर दर्द",
+      "Annual health check — mild anaemia": "वार्षिक स्वास्थ्य जांच — हल्की खून की कमी",
+      "Routine check-up, tiredness": "नियमित जांच, थकान",
+      "Advised rest and fluids. Review if fever persists beyond 3 days.": "आराम और अधिक तरल पदार्थ लेने की सलाह। बुखार 3 दिन से अधिक रहे तो दोबारा दिखाएं।",
+      "Echo normal. Reduce caffeine. Follow-up after 6 months.": "इको सामान्य। चाय-कॉफ़ी कम करें। 6 महीने बाद दोबारा दिखाएं।",
+      "Avoid late dinners and spicy food. Symptoms resolved on review.": "देर रात खाना और मसालेदार भोजन से बचें। जांच पर लक्षण ठीक पाए गए।",
+      "Physiotherapy for 2 weeks. No lifting above 10 kg.": "2 हफ्ते फिजियोथेरेपी। 10 किलो से अधिक वजन न उठाएं।",
+      "Iron-rich diet advised. Repeat Hb after 2 months.": "आयरन युक्त आहार लें। 2 महीने बाद हीमोग्लोबिन दोबारा जांचें।"
+    };
+
     (function () {
       const HI = {
         // --- Top bar / shell ---
@@ -939,6 +1173,8 @@
         "FHIR JSON copied.": "FHIR JSON कॉपी हो गया।",
         "FHIR R4 Bundle successfully posted to server!": "FHIR R4 बंडल सर्वर पर सफलतापूर्वक भेज दिया गया!"
       };
+
+      Object.assign(HI, window.MB_RECORDS_HI || {});
 
       // Patterns for strings that contain numbers/names that change at runtime.
       const PATTERNS = [
