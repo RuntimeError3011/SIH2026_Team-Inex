@@ -1540,3 +1540,252 @@
       border-color: #3b82f6;
       color: white;
     }
+/* ==========================================================================
+   Patient Records / Medical History
+   ========================================================================== */
+.records-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-card);
+}
+
+.records-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.records-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+.records-sub {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.records-owner {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.records-owner-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.records-owner-id {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.records-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.records-chip {
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-muted);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.records-chip:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-main);
+}
+
+.records-chip.active {
+  background: rgba(59, 130, 246, 0.16);
+  border-color: var(--border-accent);
+  color: #93c5fd;
+}
+
+.records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.record-item {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.record-item:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-card-hover);
+}
+
+.record-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+
+.record-date {
+  min-width: 92px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.record-date-day {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+.record-date-year {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.record-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.record-diagnosis {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.record-doctor {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.record-doctor strong {
+  color: #93c5fd;
+  font-weight: 600;
+}
+
+.record-tag {
+  padding: 5px 11px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tag-closed {
+  background: var(--color-emerald-bg);
+  color: #34d399;
+  border: 1px solid var(--color-emerald-border);
+}
+
+.tag-followup {
+  background: rgba(245, 158, 11, 0.13);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.32);
+}
+
+.tag-active {
+  background: rgba(59, 130, 246, 0.14);
+  color: #93c5fd;
+  border: 1px solid var(--border-accent);
+}
+
+.record-caret {
+  color: var(--text-dim);
+  font-size: 15px;
+  transition: var(--transition-smooth);
+}
+
+.record-item.open .record-caret {
+  transform: rotate(180deg);
+  color: #93c5fd;
+}
+
+.record-detail {
+  display: none;
+  padding: 0 16px 16px 16px;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.record-item.open .record-detail {
+  display: block;
+}
+
+.record-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.record-field-label {
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.record-field-value {
+  font-size: 13px;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+.record-meds {
+  list-style: none;
+  margin-top: 4px;
+}
+
+.record-meds li {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  padding: 3px 0 3px 14px;
+  position: relative;
+}
+
+.record-meds li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+}
+
+.records-empty {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+  padding: 26px 0;
+}
+
+@media (max-width: 720px) {
+  .record-row { flex-wrap: wrap; }
+  .records-owner { text-align: left; }
+}
