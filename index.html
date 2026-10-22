@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MedBuddy - Smart Triage & Healthcare Kiosk</title>
+  <title>MedBuddy - Smart Healthcare & Triage Kiosk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -11,36 +11,35 @@
 </head>
 <body>
 
-  <!-- Top Mockup Status Header -->
+  <!-- ==========================================================================
+       Top Kiosk Status Header (Clean Healthcare Header)
+       ========================================================================== -->
   <header class="kiosk-top-bar">
-    <div class="kiosk-status-dots">
-      <div class="kiosk-dot red"></div>
-      <div class="kiosk-dot yellow"></div>
-      <div class="kiosk-dot green"></div>
-    </div>
-
-    <div class="kiosk-url-pill">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+    <!-- Clean Hospital & Kiosk Terminal Indicator -->
+    <div class="kiosk-location-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+        <circle cx="12" cy="10" r="3"></circle>
       </svg>
-      <span>https://medbuddy.local/dashboard</span>
+      <span id="txtKioskLocation">City General Hospital • Smart Triage Kiosk #03</span>
+      <div class="kiosk-live-dot" title="Kiosk Online"></div>
     </div>
 
+    <!-- Header Actions: Theme Switcher, Language Toggle, User Avatar -->
     <div class="kiosk-meta-controls">
-      <div class="fhir-status-pill" onclick="openFhirModal()" title="View HL7 FHIR R4 API Explorer">
-        <div class="fhir-dot"></div>
-        <span>FHIR R4 • Live</span>
-        <span class="fhir-ping" id="fhirLatencyPing">42ms</span>
-      </div>
+      <!-- Light / Dark Theme Switcher -->
+      <button class="theme-toggle-btn" id="btnThemeToggle" onclick="toggleTheme()" title="Toggle White / Dark Theme">
+        <span id="themeToggleIcon">☀️</span>
+        <span id="themeToggleText">Light</span>
+      </button>
 
-      <!-- Quick Language Switcher -->
+      <!-- Bilingual Language Quick Switcher -->
       <div class="lang-toggle-group" title="Language / भाषा">
         <button class="lang-toggle-btn active" id="btnLangEn" onclick="switchLanguage('en')">English</button>
         <button class="lang-toggle-btn" id="btnLangHi" onclick="switchLanguage('hi')">हिंदी</button>
       </div>
 
-      <div class="avatar-circle" id="userBadge">A</div>
+      <div class="avatar-circle" id="userBadge">R</div>
       <div class="lang-dropdown" id="langSelector" title="More Languages">
         <span id="currentLangText">English</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -50,18 +49,17 @@
     </div>
   </header>
 
-  <!-- Main Kiosk Layout Shell -->
+  <!-- ==========================================================================
+       Main 3-Column Kiosk Shell
+       ========================================================================== -->
   <div class="app-shell">
 
-    <!-- ==========================================
-         COLUMN 1: Left Navigation Sidebar
-         ========================================== -->
+    <!-- COLUMN 1: Left Navigation Sidebar -->
     <nav class="sidebar">
       <div>
         <!-- Brand Header -->
         <div class="brand-container">
           <div class="brand-icon-wrapper">
-            <!-- Stethoscope SVG -->
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"></path>
               <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"></path>
@@ -91,7 +89,7 @@
                 <line x1="12" y1="19" x2="12" y2="23"></line>
                 <line x1="8" y1="23" x2="16" y2="23"></line>
               </svg>
-              <span id="txtNavSymptom">Symptom Check</span>
+              <span id="txtNavSymptom">Symptom Check (AI)</span>
             </div>
           </li>
 
@@ -119,692 +117,486 @@
             </div>
           </li>
 
-          <li class="nav-item" onclick="scrollToRecords()">
+          <li class="nav-item" onclick="openPatientRecordsModal()">
             <div class="nav-item-content">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"></path>
-                <line x1="8" y1="8" x2="16" y2="8"></line>
-                <line x1="8" y1="12" x2="16" y2="12"></line>
-                <line x1="8" y1="16" x2="13" y2="16"></line>
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                <path d="M9 12h6"></path>
+                <path d="M9 16h6"></path>
+                <path d="M9 8h2"></path>
               </svg>
               <span id="txtNavRecords">Patient Records</span>
             </div>
-            <span class="badge-pill badge-sync">History</span>
+            <span class="badge-pill" style="background: var(--color-emerald-bg); color: var(--color-emerald); font-size: 10px;" id="txtBadgeAbdm">ABDM</span>
           </li>
-
 
           <li class="nav-item" onclick="openIdSyncModal()">
             <div class="nav-item-content">
-              <!-- Fingerprint / ID Sync -->
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M12 11c0 2.2-1.8 4-4 4"></path>
-                <path d="M16 11c0 4.4-3.6 8-8 8"></path>
-                <path d="M8 7a4 4 0 0 1 8 0c0 1.2-.4 2.3-1 3.2"></path>
-                <path d="M4 11a8 8 0 0 1 15.3-3.3"></path>
-                <path d="M12 15a4 4 0 0 0 4-4"></path>
-                <path d="M20 11a12 12 0 0 0-1.8-6.3"></path>
+                <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+                <circle cx="9" cy="10" r="2"></circle>
+                <line x1="15" y1="8" x2="17" y2="8"></line>
+                <line x1="15" y1="12" x2="17" y2="12"></line>
               </svg>
-              <span id="txtNavIdSync">Identity Sync</span>
-            </div>
-            <span class="badge-pill badge-sync">ABHA+</span>
-          </li>
-
-          <li class="nav-item" onclick="openFhirModal()">
-            <div class="nav-item-content">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
-              </svg>
-              <span id="txtNavFhir">FHIR Records</span>
-            </div>
-            <span class="badge-pill" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">R4</span>
-          </li>
-
-          <li class="nav-item" onclick="openStaffModal()">
-            <div class="nav-item-content">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                <line x1="12" y1="17" x2="12.01" y2="17"></line>
-              </svg>
-              <span id="txtNavHelp">Help</span>
+              <span id="txtNavSync">Identity Sync</span>
             </div>
           </li>
         </ul>
       </div>
 
-      <!-- Sidebar Bottom Action -->
+      <!-- Sidebar Footer -->
       <div class="sidebar-footer">
-        <div class="logout-btn" onclick="triggerToast('Patient session saved safely.')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-            <polyline points="16 17 21 12 16 7"></polyline>
-            <line x1="21" y1="12" x2="9" y2="12"></line>
-          </svg>
-          <span id="txtNavLogout">Logout</span>
+        <div class="nav-item" onclick="openStaffModal()">
+          <div class="nav-item-content">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <span id="txtNavHelp">Help & Support</span>
+          </div>
+        </div>
+
+        <div class="nav-item" onclick="triggerToast('Session cleared. Kiosk ready for next patient.')">
+          <div class="nav-item-content">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span id="txtNavLogout">Logout / Exit</span>
+          </div>
         </div>
       </div>
     </nav>
 
-    <!-- ==========================================
-         COLUMN 2: Center Triage Dashboard
-         ========================================== -->
+    <!-- COLUMN 2: Center Main Stage / Kiosk Content -->
     <main class="main-content">
 
-      <!-- Critical Alert Banner -->
-      <div class="alert-banner">
-        <div class="alert-left-content">
-          <div class="alert-icon-box">
-            <!-- Warning Triangle SVG -->
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- 1. Severe Emergency Alert Banner -->
+      <section class="emergency-banner" id="emergencyBanner">
+        <div class="emergency-info-group">
+          <div class="emergency-icon-ring">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
               <line x1="12" y1="9" x2="12" y2="13"></line>
               <line x1="12" y1="17" x2="12.01" y2="17"></line>
             </svg>
           </div>
           <div>
-            <div class="alert-title" id="txtAlertTitle">Severe symptom detected</div>
-            <div class="alert-desc" id="txtAlertDesc">Chest pain, heavy bleeding or breathing trouble — tell a nurse now, don't wait for your turn.</div>
+            <div class="emergency-title" id="txtEmergencyTitle">Severe Symptoms Detected</div>
+            <div class="emergency-desc" id="txtEmergencyDesc">Chest pain, heavy bleeding, or breathing difficulty — inform nurse immediately, do not wait.</div>
           </div>
         </div>
-        <button class="btn-call-staff" onclick="triggerEmergencyCall()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-          <span id="txtBtnCallStaff">Call staff</span>
-        </button>
+        <div class="emergency-actions">
+          <button class="btn-emergency-action" onclick="callHospitalStaff()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span id="txtBtnCallStaff">Call Staff</span>
+          </button>
+          <button class="btn-emergency-dismiss" onclick="dismissBanner()" title="Dismiss Alert">✕</button>
+        </div>
+      </section>
+
+      <!-- 2. Hero Voice / AI Assistant Card -->
+      <section class="hero-voice-card" onclick="openVoiceModal()">
+        <div class="hero-voice-left">
+          <div class="voice-mic-orb">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </div>
+          <div>
+            <div class="hero-voice-title" id="txtHeroTitle">Speak or Tap to begin</div>
+            <div class="hero-voice-subtitle" id="txtHeroSubtitle">Tell us what hurts today • AI Conversational Triage Active</div>
+          </div>
+        </div>
+
+        <div class="voice-waveform-preview">
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+        </div>
+      </section>
+
+      <!-- 3. 2x2 Quick Symptom Grid -->
+      <div>
+        <div class="symptom-section-title" id="txtSymptomSectionTitle">Quick Symptom Selection</div>
+        <div class="symptoms-grid" style="margin-top: 10px;">
+          <!-- Symptom Card 1: Head -->
+          <div class="symptom-card" onclick="selectQuickSymptom('Head')">
+            <div class="symptom-card-header">
+              <div class="symptom-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M9 10h.01"></path>
+                  <path d="M15 10h.01"></path>
+                  <path d="M9.5 15a3.5 3.5 0 0 0 5 0"></path>
+                </svg>
+              </div>
+              <span class="badge-pill" style="background: rgba(37, 99, 235, 0.1); color: var(--color-primary);" id="badgeMild1">Mild to Severe</span>
+            </div>
+            <div>
+              <div class="symptom-card-title" id="txtSymHead">Head</div>
+              <div class="symptom-card-desc" id="txtSymHeadDesc">Throbbing, migraine, dizziness, or sinus pressure.</div>
+            </div>
+          </div>
+
+          <!-- Symptom Card 2: Chest -->
+          <div class="symptom-card" onclick="selectQuickSymptom('Chest')">
+            <div class="symptom-card-header">
+              <div class="symptom-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </div>
+              <span class="badge-pill" style="background: rgba(220, 38, 38, 0.1); color: var(--color-emergency);" id="badgeUrgent">Urgent Priority</span>
+            </div>
+            <div>
+              <div class="symptom-card-title" id="txtSymChest">Chest</div>
+              <div class="symptom-card-desc" id="txtSymChestDesc">Sharp pain, tightness, palpitations, or breathing issues.</div>
+            </div>
+          </div>
+
+          <!-- Symptom Card 3: Stomach -->
+          <div class="symptom-card" onclick="selectQuickSymptom('Stomach')">
+            <div class="symptom-card-header">
+              <div class="symptom-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M8 12a4 4 0 0 0 8 0"></path>
+                </svg>
+              </div>
+              <span class="badge-pill" style="background: rgba(217, 119, 6, 0.1); color: var(--color-amber);" id="badgeGastro">Gastro</span>
+            </div>
+            <div>
+              <div class="symptom-card-title" id="txtSymStomach">Stomach</div>
+              <div class="symptom-card-desc" id="txtSymStomachDesc">Cramps, nausea, acid reflux, or acute abdominal ache.</div>
+            </div>
+          </div>
+
+          <!-- Symptom Card 4: Body Pain -->
+          <div class="symptom-card" onclick="selectQuickSymptom('Body Pain')">
+            <div class="symptom-card-header">
+              <div class="symptom-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                </svg>
+              </div>
+              <span class="badge-pill" style="background: rgba(5, 150, 105, 0.1); color: var(--color-emerald);" id="badgeFever">Fever / Aches</span>
+            </div>
+            <div>
+              <div class="symptom-card-title" id="txtSymBody">Body Pain</div>
+              <div class="symptom-card-desc" id="txtSymBodyDesc">High fever, chills, joint soreness, or generalized fatigue.</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Split Hero Mic + 2x2 Symptoms Grid -->
-      <div class="triage-grid-row">
-        <!-- Hero Voice Mic Card -->
-        <div class="hero-mic-card" onclick="openVoiceModal()">
-          <div class="mic-pulse-outer">
-            <div class="mic-pulse-ring"></div>
-            <div class="mic-pulse-ring"></div>
-            <div class="mic-core-button">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                <line x1="12" y1="19" x2="12" y2="23"></line>
-                <line x1="8" y1="23" x2="16" y2="23"></line>
-              </svg>
-            </div>
-          </div>
-          <div class="hero-title" id="txtHeroTitle">Speak or tap to begin</div>
-          <div class="hero-subtitle" id="txtHeroSub">Tell us what's bothering you today</div>
-        </div>
-
-        <!-- 2x2 Symptom Category Matrix -->
-        <div class="symptom-quad-grid">
-          <!-- Head -->
-          <div class="symptom-card" onclick="openSymptomDetail('Head')">
-            <div class="symptom-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="M16 16s-1.5-2-4-2-4 2-4 2"></path>
-                <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                <line x1="15" y1="9" x2="15.01" y2="9"></line>
-              </svg>
-            </div>
-            <span class="symptom-label" id="txtSymHead">Head</span>
-          </div>
-
-          <!-- Chest -->
-          <div class="symptom-card" onclick="openSymptomDetail('Chest')">
-            <div class="symptom-icon-box">
-              <!-- Lungs SVG -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M12 4v16"></path>
-                <path d="M12 8a5 5 0 0 0-5-5H6a4 4 0 0 0-4 4v5a6 6 0 0 0 6 6h1a4 4 0 0 0 3-1.5"></path>
-                <path d="M12 8a5 5 0 0 1 5-5h1a4 4 0 0 1 4 4v5a6 6 0 0 1-6 6h-1a4 4 0 0 1-3-1.5"></path>
-              </svg>
-            </div>
-            <span class="symptom-label" id="txtSymChest">Chest</span>
-          </div>
-
-          <!-- Stomach -->
-          <div class="symptom-card" onclick="openSymptomDetail('Stomach')">
-            <div class="symptom-icon-box">
-              <!-- Stomach / Digestive SVG -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M7 3a4 4 0 0 0-4 4v4a7 7 0 0 0 7 7h2a6 6 0 0 0 6-6v-2a7 7 0 0 0-7-7H7z"></path>
-                <path d="M10 13c1 1 3 1 4 0"></path>
-              </svg>
-            </div>
-            <span class="symptom-label" id="txtSymStomach">Stomach</span>
-          </div>
-
-          <!-- Body Pain -->
-          <div class="symptom-card" onclick="openSymptomDetail('Body pain')">
-            <div class="symptom-icon-box">
-              <!-- Bone / Joint SVG -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M17 10c.7-.7 1.6-1 2.5-.7 1.6.5 2.5 2.2 2 3.8-.3.9-.9 1.6-1.7 2l-7.6 7.6c-.7.7-1.7 1.1-2.7 1.1s-2-.4-2.7-1.1c-.7-.7-1.1-1.7-1.1-2.7s.4-2 1.1-2.7L17 10z"></path>
-                <path d="M7 14c-.7.7-1.6 1-2.5.7-1.6-.5-2.5-2.2-2-3.8.3-.9.9-1.6 1.7-2l7.6-7.6c.7-.7 1.7-1.1 2.7-1.1s2 .4 2.7 1.1c.7.7 1.1 1.7 1.1 2.7s-.4 2-1.1 2.7L7 14z"></path>
-              </svg>
-            </div>
-            <span class="symptom-label" id="txtSymBodyPain">Body pain</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick Action Utilities (3 Columns) -->
-      <div class="utility-actions-row">
-        <!-- Scan Report -->
+      <!-- 4. Bottom Utility Actions (3 Cards) -->
+      <section class="utility-actions-grid">
         <div class="utility-card" onclick="openScanReportModal()">
           <div class="utility-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
               <circle cx="12" cy="13" r="4"></circle>
             </svg>
           </div>
-          <div class="utility-content">
-            <h4 id="txtUtilScanTitle">Scan report</h4>
-            <p id="txtUtilScanSub">Upload or scan medical documents</p>
+          <div>
+            <div class="utility-title" id="txtUtilScan">Scan report</div>
+            <div class="utility-desc" id="txtUtilScanDesc">Upload lab or paper prescriptions</div>
           </div>
         </div>
 
-        <!-- ABHA / Aadhaar / Passport Sync -->
         <div class="utility-card" onclick="openIdSyncModal()">
           <div class="utility-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 11c0 2.2-1.8 4-4 4"></path>
-              <path d="M16 11c0 4.4-3.6 8-8 8"></path>
-              <path d="M8 7a4 4 0 0 1 8 0c0 1.2-.4 2.3-1 3.2"></path>
-              <path d="M4 11a8 8 0 0 1 15.3-3.3"></path>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+              <circle cx="9" cy="10" r="2"></circle>
+              <line x1="15" y1="8" x2="17" y2="8"></line>
+              <line x1="15" y1="12" x2="17" y2="12"></line>
             </svg>
           </div>
-          <div class="utility-content">
-            <h4 id="txtUtilIdTitle">ID Sync <span style="font-size: 10px; color:#38bdf8; font-weight: 500;">ABHA • Aadhaar • Passport</span></h4>
-            <p id="txtUtilIdSub">Securely link verified health records</p>
+          <div>
+            <div class="utility-title" id="txtUtilSync">Identity Sync</div>
+            <div class="utility-desc" id="txtUtilSyncDesc">ABHA, Aadhaar & Passport biometric sync</div>
           </div>
         </div>
 
-        <!-- Help from staff -->
         <div class="utility-card" onclick="openStaffModal()">
           <div class="utility-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
             </svg>
           </div>
-          <div class="utility-content">
-            <h4 id="txtUtilHelpTitle">Help from staff</h4>
-            <p id="txtUtilHelpSub">Request assistance from our team</p>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- ============ Patient Records / Medical History ============ -->
-      <div class="records-card" id="patientRecordsSection">
-        <div class="records-head">
           <div>
-            <div class="records-title">Patient Records</div>
-            <div class="records-sub">Past visits, diagnosis and the doctor consulted</div>
-          </div>
-          <div class="records-owner">
-            <span class="records-owner-name" id="recordsOwnerName">Rahul Sharma</span>
-            <span class="records-owner-id" id="recordsOwnerId">ABHA: 91-8842-1092-4410</span>
+            <div class="utility-title" id="txtUtilHelp">Help from staff</div>
+            <div class="utility-desc" id="txtUtilHelpDesc">Assistance for senior citizens & vitals</div>
           </div>
         </div>
-
-        <div class="records-filter-row" id="recordsFilterRow"></div>
-        <div class="records-list" id="recordsList"></div>
-        <div class="records-empty" id="recordsEmpty" style="display:none;">No visits found for this filter.</div>
-      </div>
-
-      <!-- How to Get Your Prescription Workflow Guide -->
-      <div class="workflow-guide-card">
-        <div class="workflow-header" id="txtFlowTitle">How to get your prescription</div>
-        <div class="workflow-steps-flex">
-          <!-- Step 1 -->
-          <div class="workflow-step">
-            <div class="step-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="7" height="7"></rect>
-                <rect x="14" y="3" width="7" height="7"></rect>
-                <rect x="14" y="14" width="7" height="7"></rect>
-                <rect x="3" y="14" width="7" height="7"></rect>
-              </svg>
-            </div>
-            <div class="step-text" id="txtStep1">Scan the QR code at the pharmacy or clinic</div>
-          </div>
-
-          <div class="step-arrow">→</div>
-
-          <!-- Step 2 -->
-          <div class="workflow-step">
-            <div class="step-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-              </svg>
-            </div>
-            <div class="step-text" id="txtStep2">Your prescription will appear instantly</div>
-          </div>
-
-          <div class="step-arrow">→</div>
-
-          <!-- Step 3 -->
-          <div class="workflow-step">
-            <div class="step-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-              </svg>
-            </div>
-            <div class="step-text" id="txtStep3">Follow the schedule and set reminders if needed</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Kiosk Legal & Safety Disclaimer -->
-      <footer class="kiosk-footer-disclaimer" id="txtDisclaimer">
-        This kiosk is for guidance only and not a substitute for professional medical advice.<br>
-        In emergencies, contact staff immediately.
-      </footer>
+      </section>
     </main>
 
-    <!-- ==========================================
-         COLUMN 3: Right Prescription Details Drawer
-         ========================================== -->
-    <aside class="prescription-panel">
-      <!-- Panel Header -->
-      <div class="prescription-header">
-        <div class="back-btn-title" onclick="triggerToast('Viewing patient record')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          <span id="txtRxDetails">Prescription Details</span>
+    <!-- COLUMN 3: Right Panel: Prescription Drawer & Active Triage -->
+    <aside class="right-drawer">
+      <div class="drawer-header">
+        <div class="drawer-title" id="txtDrawerTitle">Prescription Drawer</div>
+        <span class="badge-pill badge-new">Active</span>
+      </div>
+
+      <!-- How to Get Your Prescription Steps -->
+      <div class="drawer-card">
+        <div style="font-size: 13px; font-weight: 700; color: var(--text-white);" id="txtRxGuideTitle">
+          How to get your prescription
         </div>
-        <div class="status-verified">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span id="txtRxVerified">Verified</span>
+        <div class="rx-steps-list">
+          <div class="rx-step-item">
+            <div class="rx-step-num">1</div>
+            <div>
+              <div class="rx-step-text-title" id="txtRxStep1">Describe your symptoms</div>
+              <div class="rx-step-text-desc" id="txtRxStep1Desc">Tap above or speak into the microphone.</div>
+            </div>
+          </div>
+          <div class="rx-step-item">
+            <div class="rx-step-num">2</div>
+            <div>
+              <div class="rx-step-text-title" id="txtRxStep2">Complete automated triage</div>
+              <div class="rx-step-text-desc" id="txtRxStep2Desc">AI triages and forwards vitals to the doctor.</div>
+            </div>
+          </div>
+          <div class="rx-step-item">
+            <div class="rx-step-num">3</div>
+            <div>
+              <div class="rx-step-text-title" id="txtRxStep3">Collect digital prescription</div>
+              <div class="rx-step-text-desc" id="txtRxStep3Desc">Print here or receive it directly via WhatsApp/ABDM.</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Patient & Doctor Metadata -->
-      <div class="patient-meta-card">
-        <div class="meta-group">
-          <div class="meta-label" id="txtLblPatient">Patient</div>
-          <div class="meta-value patient-name" id="displayPatientName">Rahul Sharma</div>
-          <div class="meta-sub" id="displayPatientId">ABHA: 91-8842-1092-4410 • Age: 32 / M</div>
+      <!-- Active Prescription Card -->
+      <div class="drawer-card">
+        <div class="active-rx-preview">
+          <div class="active-rx-header">
+            <span style="font-size: 12px; font-weight: 700; color: var(--color-primary);" id="txtLatestRx">Latest Consultation</span>
+            <span class="rx-code-tag">Rx #2024-889</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--text-white); margin-bottom: 2px;" id="rxDoctorName">Dr. Anjali Verma, MD</div>
+          <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 8px;">General Medicine • City Hospital</div>
+          <div style="font-size: 12px; color: var(--text-main); line-height: 1.4;">
+            • Paracetamol 650mg (1-0-1)<br>
+            • Amoxicillin 500mg (1-0-1)<br>
+            • Pantoprazole 40mg (1-0-0)
+          </div>
         </div>
 
-        <div class="meta-group">
-          <div class="meta-label" id="txtLblRxId">Prescription ID</div>
-          <div class="meta-value" style="font-family: 'JetBrains Mono', monospace; font-size: 12px;">RX-2024-05-24-00123</div>
-        </div>
-
-        <div class="meta-group">
-          <div class="meta-label" id="txtLblPrescribedOn">Prescribed on</div>
-          <div class="meta-value" id="txtPrescribedOnDate">24 May 2024, 10:30 AM</div>
-        </div>
-
-        <div class="meta-group">
-          <div class="meta-label" id="txtLblPrescribedBy">Prescribed by</div>
-          <div class="meta-value doctor-name">Dr. Anjali Verma</div>
-          <div class="meta-sub" id="txtDoctorSub">MBBS, MD (General Medicine) • Reg #48291</div>
-        </div>
-
-        <button class="btn-view-full-rx" onclick="openFullRxModal()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <button class="btn-submit-action" style="width: 100%; margin-top: 14px;" onclick="openFullRxModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
           </svg>
-          <span id="txtBtnViewFullRx">View full prescription</span>
+          <span id="txtBtnViewFullRx">View Full Prescription</span>
         </button>
-      </div>
-
-      <!-- Medicines & Schedule -->
-      <div class="schedule-header-row">
-        <div class="section-title" id="txtMedScheduleTitle">Medicines & Schedule</div>
-        <button class="btn-set-reminder" id="reminderToggleBtn" onclick="toggleMedReminder()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-          <span id="reminderBtnText">Set reminder</span>
-        </button>
-      </div>
-
-      <div class="medicines-list">
-        <!-- Medicine 1 -->
-        <div class="med-item-card">
-          <div class="med-left-info">
-            <div class="med-pill-icon">
-              <!-- Pill Capsule SVG -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path>
-                <path d="m8.5 8.5 7 7"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="med-name">Paracetamol 650 mg</div>
-              <div class="med-dose" id="txtMedDose1">1 tablet</div>
-            </div>
-          </div>
-          <div class="med-right-schedule">
-            <div class="food-timing-tag" id="txtFoodTiming1">After Food</div>
-            <div class="schedule-badge-row">
-              <span class="time-chip">08:00 AM</span>
-              <span class="frequency-tag" id="txtFreq1">☀️ Daily</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Medicine 2 -->
-        <div class="med-item-card">
-          <div class="med-left-info">
-            <div class="med-pill-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path>
-                <path d="m8.5 8.5 7 7"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="med-name">Amoxicillin 500 mg</div>
-              <div class="med-dose" id="txtMedDose2">1 capsule</div>
-            </div>
-          </div>
-          <div class="med-right-schedule">
-            <div class="food-timing-tag" id="txtFoodTiming2">After Food</div>
-            <div class="schedule-badge-row">
-              <span class="time-chip">02:00 PM</span>
-              <span class="frequency-tag" id="txtFreq2">☀️ Daily</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Medicine 3 -->
-        <div class="med-item-card">
-          <div class="med-left-info">
-            <div class="med-pill-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path>
-                <path d="m8.5 8.5 7 7"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="med-name">Pantoprazole 40 mg</div>
-              <div class="med-dose" id="txtMedDose3">1 tablet</div>
-            </div>
-          </div>
-          <div class="med-right-schedule">
-            <div class="food-timing-tag" id="txtFoodTiming3">Before Food</div>
-            <div class="schedule-badge-row">
-              <span class="time-chip">08:00 PM</span>
-              <span class="frequency-tag" id="txtFreq3">☀️ Daily</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Duration and Notes -->
-      <div class="rx-summary-footer">
-        <div class="summary-item-row">
-          <span class="summary-key" id="txtLblDuration">Duration</span>
-          <span class="summary-val" id="txtValDuration">5 Days</span>
-        </div>
-        <div class="summary-item-row">
-          <span class="summary-key" id="txtLblNotes">Notes</span>
-        </div>
-        <div class="rx-notes-text" id="txtRxNotes">
-          Complete the full course of medicine. Drink plenty of warm water and avoid heavy greasy meals.
-        </div>
       </div>
     </aside>
   </div>
 
   <!-- ==========================================================================
-       5. Interactive Modals
+       MODALS SECTION
        ========================================================================== -->
 
-  <!-- Modal A: Voice Triage Modal -->
+  <!-- Modal A: Conversational LLM Symptom Triage Assistant -->
   <div class="modal-overlay" id="voiceModal" onclick="closeOnBackdrop(event, 'voiceModal')">
-    <div class="modal-card">
+    <div class="modal-card llm-modal-card">
       <div class="modal-header">
         <div class="modal-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
-            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+            <path d="M12 2a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"></path>
             <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-            <line x1="12" y1="19" x2="12" y2="23"></line>
-            <line x1="8" y1="23" x2="16" y2="23"></line>
           </svg>
-          <span>MedBuddy AI Voice Triage</span>
+          <span id="i18nLlmTitle">MedBuddy AI Clinical Triage Assistant</span>
         </div>
         <button class="modal-close-btn" onclick="closeModal('voiceModal')">✕</button>
       </div>
-      <div class="modal-body" style="text-align: center;">
-        <div style="font-size: 13px; color: var(--text-muted);">Listening to your voice... Speak clearly into the kiosk microphone.</div>
 
-        <div class="waveform-visualizer">
-          <div class="waveform-bar"></div>
-          <div class="waveform-bar"></div>
-          <div class="waveform-bar"></div>
-          <div class="waveform-bar"></div>
-          <div class="waveform-bar"></div>
-          <div class="waveform-bar"></div>
-          <div class="waveform-bar"></div>
+      <div class="modal-body" style="gap: 12px;">
+        <!-- Controls & Mode Bar -->
+        <div class="llm-controls-bar">
+          <div class="tts-toggle active" id="btnTtsToggle" onclick="toggleTts()">
+            <span>🔊</span>
+            <span id="ttsToggleText">Read Aloud (बोलकर सुनाएं): ON</span>
+          </div>
+          <span style="font-family:'JetBrains Mono',monospace; color:var(--color-emerald); font-size:11px;">● Clinical Engine: Active</span>
         </div>
 
-        <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px; text-align: left;">
-          <div style="font-size: 11px; color: #38bdf8; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Live Speech Transcription:</div>
-          <div id="voiceTranscriptText" style="font-size: 13px; color: var(--text-main); font-style: italic;">
-            "I've been feeling a dull ache in the lower abdomen and slight fever since last night..."
+        <!-- Chat Feed -->
+        <div class="llm-chat-feed" id="llmChatFeed">
+          <div class="chat-message-row">
+            <div class="chat-avatar bot">AI</div>
+            <div class="chat-bubble bot" id="botGreetingMsg">
+Hello Rahul! I am your MedBuddy AI Clinical Assistant.
+Please tell me what symptoms or concerns you are experiencing today. You can speak into the microphone or type below.
+              <span class="chat-timestamp" id="botGreetingTime">Just now</span>
+            </div>
           </div>
         </div>
 
-        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-          <button style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 11px; padding: 6px 12px; border-radius: 20px; cursor: pointer;" onclick="setSampleSpeech('Chest congestion and wheezing')">"Chest congestion"</button>
-          <button style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 11px; padding: 6px 12px; border-radius: 20px; cursor: pointer;" onclick="setSampleSpeech('Severe headache and sensitivity to bright light')">"Throbbing headache"</button>
-          <button style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 11px; padding: 6px 12px; border-radius: 20px; cursor: pointer;" onclick="setSampleSpeech('Sharp knee joint pain after morning jog')">"Knee & joint pain"</button>
+        <!-- Suggestion Chips -->
+        <div class="chat-suggestion-container">
+          <div class="chat-suggestion-label" id="i18nSuggestionsLabel">Quick Symptom Prompts:</div>
+          <div class="chat-suggestion-chips">
+            <div class="chat-chip" onclick="handleChipClick('I am suffering from fever')">🤒 I am suffering from fever</div>
+            <div class="chat-chip" onclick="handleChipClick('Chest discomfort or tightness')">🫀 Chest discomfort</div>
+            <div class="chat-chip" onclick="handleChipClick('Stomach ache & nausea')">🤢 Stomach ache</div>
+            <div class="chat-chip" onclick="handleChipClick('Severe headache & dizziness')">🤕 Severe headache</div>
+            <div class="chat-chip" onclick="handleChipClick('Cough and sore throat')">🗣️ Cough & sore throat</div>
+          </div>
         </div>
 
-        <button class="btn-submit-action" onclick="analyzeVoiceTriage()">
-          <span>Analyze Symptoms with MedBuddy AI</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
+        <!-- Input Bar with Voice Mic & Send -->
+        <div class="chat-input-container">
+          <button class="chat-btn-mic" id="btnChatMic" onclick="toggleSpeechRecognition()" title="Click to speak (माइक में बोलें)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </button>
+          <input type="text" class="chat-input-field" id="inputChatMessage" placeholder="Describe your symptoms (e.g. 'I am suffering from fever')..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+          <button class="chat-btn-send" id="btnChatSend" onclick="sendChatMessage()">
+            <span id="txtBtnSend">Send</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal B: Unified Identity Sync (ABHA, Aadhaar, Passport) -->
+  <!-- Modal B: Multi-Identity Sync Modal -->
   <div class="modal-overlay" id="idSyncModal" onclick="closeOnBackdrop(event, 'idSyncModal')">
     <div class="modal-card">
       <div class="modal-header">
         <div class="modal-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
-            <path d="M12 11c0 2.2-1.8 4-4 4"></path>
-            <path d="M16 11c0 4.4-3.6 8-8 8"></path>
-            <path d="M8 7a4 4 0 0 1 8 0c0 1.2-.4 2.3-1 3.2"></path>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+            <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+            <circle cx="9" cy="10" r="2"></circle>
           </svg>
-          <span>Sync Patient Identity</span>
+          <span id="i18n-sync-title">Universal Identity Synchronization</span>
         </div>
         <button class="modal-close-btn" onclick="closeModal('idSyncModal')">✕</button>
       </div>
       <div class="modal-body">
-        <div style="font-size: 13px; color: var(--text-muted);">
-          Connect health accounts and prescriptions securely using your preferred national or international ID.
+        <div style="font-size: 13px; color: var(--text-muted);" id="i18n-sync-desc">
+          Sync your verified Government Identity to pull existing EHR and ABDM medical records.
         </div>
 
-        <!-- Multi-ID Selector Tabs -->
-        <div class="id-sync-tabs">
-          <button class="id-tab-btn active" id="tabBtnAbha" onclick="switchIdTab('abha')">
-            <span>🩺 ABHA ID</span>
-          </button>
-          <button class="id-tab-btn" id="tabBtnAadhaar" onclick="switchIdTab('aadhaar')">
-            <span>🇮🇳 Aadhaar Card</span>
-          </button>
-          <button class="id-tab-btn" id="tabBtnPassport" onclick="switchIdTab('passport')">
-            <span>🛂 Passport (NRI)</span>
-          </button>
+        <div style="display: flex; gap: 8px;">
+          <button class="lang-toggle-btn active" id="tabAbha" style="flex:1; padding:8px;" onclick="switchIdTab('ABHA')">ABHA ID</button>
+          <button class="lang-toggle-btn" id="tabAadhaar" style="flex:1; padding:8px;" onclick="switchIdTab('Aadhaar')">Aadhaar</button>
+          <button class="lang-toggle-btn" id="tabPassport" style="flex:1; padding:8px;" onclick="switchIdTab('Passport')">Passport</button>
         </div>
 
-        <!-- TAB 1: ABHA -->
-        <div id="tabContentAbha">
-          <div class="form-group" style="margin-bottom: 14px;">
-            <label class="form-label">14-Digit ABHA Number or ABHA Address</label>
-            <input type="text" class="form-input" id="inputAbha" value="91-8842-1092-4410" placeholder="e.g. rahul.sharma@abdm or 91-xxxx-xxxx-xxxx">
-          </div>
-          <div style="display: flex; gap: 10px; margin-bottom: 14px;">
-            <div style="flex: 1;" class="form-group">
-              <label class="form-label">Authentication Method</label>
-              <select class="form-input" style="background:#0b0f17; color:white;">
-                <option>Mobile OTP Verification</option>
-                <option>Aadhaar OTP via ABDM</option>
-                <option>Biometric Match</option>
-              </select>
-            </div>
-            <div style="width: 120px;" class="form-group">
-              <label class="form-label">OTP (6 Digits)</label>
-              <input type="text" class="form-input" value="492019" maxlength="6">
-            </div>
-          </div>
-          <button class="btn-submit-action" style="width: 100%;" onclick="submitIdSync('ABHA')">
-            <span>Verify & Link ABHA Records</span>
-          </button>
-        </div>
-
-        <!-- TAB 2: Aadhaar -->
-        <div id="tabContentAadhaar" style="display: none;">
-          <div class="form-group" style="margin-bottom: 14px;">
-            <label class="form-label">12-Digit Aadhaar UID Number</label>
-            <input type="text" class="form-input" id="inputAadhaar" value="6829 4410 9021" placeholder="XXXX XXXX XXXX">
-          </div>
-          <div class="biometric-scanner-box" id="bioScanner" onclick="simulateFingerprintScan()">
-            <div class="scanner-laser"></div>
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8">
-              <path d="M12 11c0 2.2-1.8 4-4 4"></path>
-              <path d="M16 11c0 4.4-3.6 8-8 8"></path>
-              <path d="M8 7a4 4 0 0 1 8 0c0 1.2-.4 2.3-1 3.2"></path>
-              <path d="M4 11a8 8 0 0 1 15.3-3.3"></path>
-              <path d="M12 15a4 4 0 0 0 4-4"></path>
+        <!-- ABHA View -->
+        <div id="viewAbha" style="display: flex; flex-direction: column; gap: 12px;">
+          <input type="text" class="kiosk-text-input" id="inputAbha" value="91-8842-1092-4410" placeholder="Enter 14-digit ABHA ID">
+          <div class="biometric-scanner-box" onclick="simulateFingerprint()">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8">
+              <path d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 004 11m0 0a8 8 0 001.008 3.864"></path>
             </svg>
-            <div style="font-size: 13px; font-weight: 600; color: #93c5fd;" id="scanStatusLabel">Place finger on kiosk glass scanner</div>
-            <div style="font-size: 11px; color: var(--text-dim);">UIDAI RD Service 2.0 Ready</div>
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-white);" id="bioScanLabel">Tap here to scan fingerprint</div>
           </div>
-          <button class="btn-submit-action" style="width: 100%; margin-top: 14px;" onclick="submitIdSync('Aadhaar')">
-            <span>Authenticate via Aadhaar Biometrics</span>
-          </button>
+          <button class="btn-submit-action" onclick="submitIdSync('ABHA')">Verify & Sync ABHA Record</button>
         </div>
 
-        <!-- TAB 3: Passport -->
-        <div id="tabContentPassport" style="display: none;">
-          <div class="form-group" style="margin-bottom: 12px;">
-            <label class="form-label">Passport Number</label>
-            <input type="text" class="form-input" id="inputPassport" value="Z9401823A" placeholder="e.g. Z9401823A">
-          </div>
-          <div style="display: flex; gap: 10px; margin-bottom: 14px;">
-            <div style="flex: 1;" class="form-group">
-              <label class="form-label">Issuing Country</label>
-              <select class="form-input" id="passportCountry" style="background:#0b0f17; color:white;">
-                <option value="India">India (NRI)</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="United States">United States</option>
-                <option value="Singapore">Singapore</option>
-                <option value="Australia">Australia</option>
-              </select>
-            </div>
-            <div style="flex: 1;" class="form-group">
-              <label class="form-label">Patient Full Name</label>
-              <input type="text" class="form-input" id="passportName" value="Rahul Sharma">
-            </div>
-          </div>
-          <div style="background: rgba(255,255,255,0.03); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md); padding: 12px; text-align: center; margin-bottom: 14px;">
-            <div style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-dim);">
-              P&lt;INDSHARMA&lt;&lt;RAHUL&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br>
-              Z9401823A8IND9204128M3009184&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;04
-            </div>
-            <div style="font-size: 11px; color: #10b981; margin-top: 6px;">✓ MRZ Optical Code Verified</div>
-          </div>
-          <button class="btn-submit-action" style="width: 100%;" onclick="submitIdSync('Passport')">
-            <span>Link International Health Passport</span>
-          </button>
+        <!-- Aadhaar View -->
+        <div id="viewAadhaar" style="display: none; flex-direction: column; gap: 12px;">
+          <input type="text" class="kiosk-text-input" id="inputAadhaar" value="6829 4410 9021" placeholder="Enter 12-digit Aadhaar Number">
+          <button class="btn-submit-action" onclick="submitIdSync('Aadhaar')">Verify via UIDAI OTP</button>
         </div>
 
+        <!-- Passport View -->
+        <div id="viewPassport" style="display: none; flex-direction: column; gap: 12px;">
+          <input type="text" class="kiosk-text-input" id="passportName" value="Rahul Sharma" placeholder="Given Name (as on Passport)">
+          <input type="text" class="kiosk-text-input" id="inputPassport" value="Z9401823A" placeholder="Passport Number (e.g. Z9401823A)">
+          <button class="btn-submit-action" onclick="submitIdSync('Passport')">Verify International Travel Record</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal C: Emergency Staff Call -->
+  <!-- Modal C: Staff Help Modal -->
   <div class="modal-overlay" id="staffModal" onclick="closeOnBackdrop(event, 'staffModal')">
-    <div class="modal-card" style="border-color: rgba(239, 68, 68, 0.5);">
-      <div class="modal-header" style="background: rgba(239, 68, 68, 0.1);">
-        <div class="modal-title" style="color: #fca5a5;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
           </svg>
-          <span>Emergency Assistance Dispatched</span>
+          <span id="i18n-staff-title">Hospital Help Desk</span>
         </div>
         <button class="modal-close-btn" onclick="closeModal('staffModal')">✕</button>
       </div>
-      <div class="modal-body" style="text-align: center;">
-        <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); border: 2px solid #ef4444; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 25px rgba(239, 68, 68, 0.4);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-          </svg>
+      <div class="modal-body">
+        <div style="font-size: 14px; font-weight: 700; color: var(--text-white);" id="i18n-staff-alert-head">A nurse or assistant has been notified.</div>
+        <div style="font-size: 13px; color: var(--text-muted); line-height: 1.5;" id="i18n-staff-alert-desc">
+          Kiosk Terminal: <strong>#03 (OPD Ground Floor)</strong><br>
+          A support executive will assist you within 2 minutes. Please remain seated nearby.
         </div>
-        <div style="font-size: 18px; font-weight: 700; color: white; margin-top: 10px;">A Nurse is on the way to Kiosk #03</div>
-        <div style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
-          Emergency triage alerted: <strong>Nurse Preeti S. (Triage Station 4)</strong> has received your alert. Estimated arrival in <span id="countdownSec" style="color: #ef4444; font-weight: 700;">45 seconds</span>.
-        </div>
-        <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: var(--radius-md); font-size: 12px; color: #fca5a5; text-align: left;">
-          • Please remain seated at this kiosk.<br>
-          • If you have severe chest pressure or shortness of breath, let bystanders know immediately.
-        </div>
-        <button class="btn-submit-action" style="background: #334155;" onclick="closeModal('staffModal')">
-          Dismiss Alert
-        </button>
+        <button class="btn-submit-action" onclick="closeModal('staffModal')">OK, Understood</button>
       </div>
     </div>
   </div>
 
-  <!-- Modal D: Diagnostic Reports & Scanner Modal -->
+  <!-- Modal D: Medical Reports & Current Reports Center -->
   <div class="modal-overlay" id="scanReportModal" onclick="closeOnBackdrop(event, 'scanReportModal')">
-    <div class="modal-card" style="max-width: 740px;">
+    <div class="modal-card" style="max-width: 680px;">
       <div class="modal-header">
         <div class="modal-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
-            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-            <circle cx="12" cy="13" r="4"></circle>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
           </svg>
-          <span id="i18n-reports-modal-title">Medical Reports & Diagnostics Center</span>
+          <span id="i18n-reports-modal-title">Medical Reports & Diagnostic Center</span>
         </div>
         <button class="modal-close-btn" onclick="closeModal('scanReportModal')">✕</button>
       </div>
-      <div class="modal-body" style="gap: 18px;">
-        
-        <!-- SECTION 1: Current Reports Box -->
+
+      <div class="modal-body" style="gap: 16px;">
+        <!-- SECTION 1: Current Diagnostic Reports Box -->
         <div class="current-reports-box">
           <div class="current-reports-header">
             <div class="current-reports-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
               </svg>
-              <span id="i18n-current-reports-heading">Current Reports (सक्रिय रिपोर्ट्स)</span>
+              <span id="i18n-current-reports-title">Current Reports (सक्रिय रिपोर्ट्स)</span>
             </div>
-            <div class="reports-sync-tag">✓ ABDM Synced • 3 Records Active</div>
+            <span class="current-reports-badge" id="i18n-reports-synced-badge">✓ ABDM Synced • 3 Records Active</span>
           </div>
 
-          <!-- List of Current Reports -->
-          <div class="reports-list-grid" id="currentReportsListContainer">
+          <div class="reports-list-container" id="currentReportsListContainer">
             <!-- Report 1: CBC -->
             <div class="report-card-item">
               <div class="report-icon-box">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                 </svg>
               </div>
               <div class="report-meta-info">
@@ -812,7 +604,7 @@
                   <span class="report-test-name">Complete Blood Count (CBC) & Lipid Profile</span>
                   <span class="report-status-badge report-status-normal">✓ Normal</span>
                 </div>
-                <div class="report-sub-details">City Central Diagnostics • 24 May 2024, 09:15 AM</div>
+                <div class="report-sub-details">City Central Diagnostics • Today, 09:15 AM</div>
                 <div class="report-metrics-row">
                   <span class="report-metric-chip">Hb: 14.2 g/dL</span>
                   <span class="report-metric-chip">WBC: 7,800/mcL</span>
@@ -820,15 +612,12 @@
                   <span class="report-metric-chip">Cholesterol: 175 mg/dL</span>
                 </div>
               </div>
-              <button class="report-action-btn" onclick="triggerToast('Viewing CBC report details.')">
+              <button class="report-action-btn" onclick="triggerToast('Viewing CBC lab report details.')">
                 <span>View</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
               </button>
             </div>
 
-            <!-- Report 2: Fasting Blood Sugar & HbA1c -->
+            <!-- Report 2: Fasting Blood Glucose -->
             <div class="report-card-item">
               <div class="report-icon-box">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -843,16 +632,13 @@
                 </div>
                 <div class="report-sub-details">Apex Endocrine Lab • 20 May 2024, 08:30 AM</div>
                 <div class="report-metrics-row">
-                  <span class="report-metric-chip">FBS: 98 mg/dL (Normal)</span>
+                  <span class="report-metric-chip">FBS: 98 mg/dL</span>
                   <span class="report-metric-chip">HbA1c: 5.6%</span>
                   <span class="report-metric-chip">PPBS: 132 mg/dL</span>
                 </div>
               </div>
               <button class="report-action-btn" onclick="triggerToast('Viewing Blood Sugar record.')">
                 <span>View</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
               </button>
             </div>
 
@@ -862,7 +648,6 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M12 4v16"></path>
                   <path d="M12 8a5 5 0 0 0-5-5H6a4 4 0 0 0-4 4v5a6 6 0 0 0 6 6h1a4 4 0 0 0 3-1.5"></path>
-                  <path d="M12 8a5 5 0 0 1 5-5h1a4 4 0 0 1 4 4v5a6 6 0 0 1-6 6h-1a4 4 0 0 1-3-1.5"></path>
                 </svg>
               </div>
               <div class="report-meta-info">
@@ -878,39 +663,26 @@
               </div>
               <button class="report-action-btn" onclick="triggerToast('Opening Chest X-Ray Film.')">
                 <span>View</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
               </button>
             </div>
           </div>
         </div>
 
         <!-- SECTION 2: Scan / Upload New Document -->
-        <div style="font-size: 13px; font-weight: 700; color: var(--text-white); margin-top: 4px;" id="i18n-scan-new-title">
+        <div style="font-size: 13px; font-weight: 700; color: var(--text-white);" id="i18n-scan-new-title">
           Scan or Upload New Medical Document
         </div>
 
         <div class="biometric-scanner-box" style="padding: 22px;" onclick="simulateDocumentScan()">
           <div class="scanner-laser" id="docLaser"></div>
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.8">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14 2 14 8 20 8"></polyline>
             <line x1="16" y1="13" x2="8" y2="13"></line>
             <line x1="16" y1="17" x2="8" y2="17"></line>
           </svg>
-          <div style="font-size: 13px; font-weight: 600; color: white;" id="docScanStatus">Place paper report face down on glass scanner or tap to upload</div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--text-white);" id="docScanStatus">Place paper report on scanner or tap to upload</div>
           <div style="font-size: 11px; color: var(--text-muted);">Supports Prescriptions, Blood Tests, X-Rays, Discharge Summaries</div>
-        </div>
-
-        <div id="ocrResultBox" style="display: none; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md); padding: 14px;">
-          <div style="font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 6px;">✓ Document OCR Extraction Complete & Added to Current Reports:</div>
-          <div style="font-size: 12px; color: var(--text-main); line-height: 1.5;">
-            • Diagnostic: Complete Blood Count (CBC) & Lipid Profile<br>
-            • Hemoglobin: 14.2 g/dL (Normal)<br>
-            • Fasting Blood Glucose: 98 mg/dL (Normal)<br>
-            • Uploaded directly to ABDM Health Locker.
-          </div>
         </div>
 
         <button class="btn-submit-action" onclick="simulateDocumentScan()">
@@ -925,7 +697,7 @@
     <div class="modal-card" style="max-width: 650px;">
       <div class="modal-header">
         <div class="modal-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14 2 14 8 20 8"></polyline>
           </svg>
@@ -933,29 +705,26 @@
         </div>
         <button class="modal-close-btn" onclick="closeModal('fullRxModal')">✕</button>
       </div>
-      <div class="modal-body" style="background: #0d121f; font-size: 13px;">
-        <!-- Clinical Header -->
+      <div class="modal-body" style="font-size: 13px;">
         <div style="display: flex; justify-content: space-between; border-bottom: 2px solid var(--border-subtle); padding-bottom: 12px;">
           <div>
-            <div style="font-size: 16px; font-weight: 800; color: white;">CITY GENERAL HOSPITAL & CLINICS</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text-white);">CITY GENERAL HOSPITAL & CLINICS</div>
             <div style="color: var(--text-muted); font-size: 11px;">Department of Internal Medicine • New Delhi</div>
           </div>
           <div style="text-align: right;">
-            <div style="font-weight: 700; color: #60a5fa;">Rx #RX-2024-05-24-00123</div>
+            <div style="font-weight: 700; color: var(--color-primary);">Rx #RX-2024-05-24-00123</div>
             <div style="font-size: 11px; color: var(--text-dim);">24 May 2024, 10:30 AM</div>
           </div>
         </div>
 
-        <!-- Patient Strip -->
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: rgba(255,255,255,0.03); padding: 10px; border-radius: var(--radius-sm);">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: var(--bg-card); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
           <div><strong style="color:var(--text-dim)">Patient:</strong> <span id="modalRxPatientName">Rahul Sharma</span></div>
           <div><strong style="color:var(--text-dim)">Age/Sex:</strong> 32 / Male</div>
           <div><strong style="color:var(--text-dim)">Synced ID:</strong> ABHA / Aadhaar</div>
         </div>
 
-        <!-- Medicines Table -->
         <div>
-          <div style="font-weight: 700; color: white; margin-bottom: 8px; font-size: 14px;">Rx (Prescribed Medications):</div>
+          <div style="font-weight: 700; color: var(--text-white); margin-bottom: 8px; font-size: 14px;">Rx (Prescribed Medications):</div>
           <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 12px;">
             <thead>
               <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--text-dim);">
@@ -967,22 +736,22 @@
               </tr>
             </thead>
             <tbody>
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: white;">
-                <td style="padding: 8px 0; font-weight: 600;">Paracetamol 650 mg</td>
+              <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--text-main);">
+                <td style="padding: 8px 0; font-weight: 700;">Paracetamol 650 mg</td>
                 <td>1 tab</td>
                 <td>1 - 0 - 0</td>
                 <td>After Food</td>
                 <td>5 Days</td>
               </tr>
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: white;">
-                <td style="padding: 8px 0; font-weight: 600;">Amoxicillin 500 mg</td>
+              <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--text-main);">
+                <td style="padding: 8px 0; font-weight: 700;">Amoxicillin 500 mg</td>
                 <td>1 cap</td>
                 <td>0 - 1 - 0</td>
                 <td>After Food</td>
                 <td>5 Days</td>
               </tr>
-              <tr style="color: white;">
-                <td style="padding: 8px 0; font-weight: 600;">Pantoprazole 40 mg</td>
+              <tr style="color: var(--text-main);">
+                <td style="padding: 8px 0; font-weight: 700;">Pantoprazole 40 mg</td>
                 <td>1 tab</td>
                 <td>0 - 0 - 1</td>
                 <td>Before Food</td>
@@ -992,122 +761,171 @@
           </table>
         </div>
 
-        <!-- Doctor Signature Footer -->
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--border-subtle); padding-top: 12px; margin-top: 10px;">
-          <div style="font-size: 11px; color: var(--text-dim);">
-            Digitally generated via MedBuddy Kiosk.<br>
-            Compliant with ABDM & NDHM Healthcare Standards.
-          </div>
-          <div style="text-align: right;">
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #34d399;">[Digitally Signed by Doctor]</div>
-            <div style="font-weight: 700; color: white;">Dr. Anjali Verma</div>
-            <div style="font-size: 11px; color: var(--text-dim);">MBBS, MD • Reg #48291</div>
-          </div>
-        </div>
-
         <div style="display: flex; gap: 10px; margin-top: 10px;">
-          <button class="btn-submit-action" style="flex: 1;" onclick="window.print()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="6 9 6 2 18 2 18 9"></polyline>
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-              <rect x="6" y="14" width="12" height="8"></rect>
-            </svg>
-            <span>Print Prescription</span>
-          </button>
-          <button class="btn-submit-action" style="flex: 1; background: rgba(16, 185, 129, 0.18); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399;" onclick="openFhirModal('medications')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2">
-              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
-            </svg>
-            <span>Export FHIR JSON</span>
-          </button>
-          <button class="btn-submit-action" style="flex: 1; background: #1e293b;" onclick="triggerToast('PDF saved to your phone via SMS.')">
-            <span>Send to Mobile</span>
-          </button>
+          <button class="btn-submit-action" style="flex: 1;" onclick="window.print()">Print Prescription</button>
+          <button class="btn-submit-action" style="flex: 1; background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-strong);" onclick="triggerToast('Prescription sent to your phone via SMS/WhatsApp.')">Send to Mobile</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal F: HL7 FHIR R4 Interoperability Inspector -->
-  <div class="modal-overlay" id="fhirModal" onclick="closeOnBackdrop(event, 'fhirModal')">
-    <div class="modal-card fhir-modal-card">
+  <!-- Modal G: Comprehensive Patient Records & Clinical History Dossier -->
+  <div class="modal-overlay" id="patientRecordsModal" onclick="closeOnBackdrop(event, 'patientRecordsModal')">
+    <div class="modal-card records-modal-card">
       <div class="modal-header">
         <div class="modal-title">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
-            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+            <path d="M9 12h6"></path>
+            <path d="M9 16h6"></path>
           </svg>
-          <span>HL7 FHIR Release 4 (R4) Interoperability Hub</span>
+          <span id="i18nRecordsModalTitle">Comprehensive Patient Records & Medical History</span>
         </div>
-        <button class="modal-close-btn" onclick="closeModal('fhirModal')">✕</button>
+        <button class="modal-close-btn" onclick="closeModal('patientRecordsModal')">✕</button>
       </div>
-      <div class="modal-body" style="gap: 14px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-muted);">
-          <span>ABDM & HL7 Compliant Kiosk Exchange Protocol</span>
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #34d399;">Profile: Indian-EHR-FHIR-R4</span>
+
+      <div class="modal-body" style="gap: 16px;">
+        <!-- Demographic Strip -->
+        <div class="patient-profile-summary">
+          <div class="patient-avatar-large">R</div>
+          <div class="patient-profile-details">
+            <h3 id="recPatientName">Rahul Sharma (राहुल शर्मा)</h3>
+            <div class="patient-profile-tags">
+              <span class="patient-tag highlight">ABHA: 91-8842-1092-4410</span>
+              <span class="patient-tag">Aadhaar: **** **** 9021</span>
+              <span class="patient-tag">Passport: Z9401823A</span>
+              <span class="patient-tag">Age: 32 Yrs / Male</span>
+              <span class="patient-tag highlight">Blood Group: O+</span>
+            </div>
+          </div>
+          <div style="text-align: right; font-size: 11px; color: var(--text-dim);">
+            <div>Primary Doctor: <strong>Dr. Anjali Verma</strong></div>
+            <div>Emergency: <strong>+91 98765-43210 (Spouse)</strong></div>
+          </div>
         </div>
 
-        <!-- Server Endpoint Bar -->
-        <div class="fhir-endpoint-bar">
-          <span style="font-weight: 700; color: var(--text-dim);">FHIR BASE:</span>
-          <input type="text" id="fhirServerUrl" value="https://hapi.fhir.org/baseR4">
-          <button class="btn-test-ping" onclick="pingFhirServer()">Test Ping</button>
+        <!-- History Grid -->
+        <div class="history-sections-grid">
+          <!-- 1. Chronic Medical Conditions -->
+          <div class="history-section-box">
+            <div class="history-section-header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+              </svg>
+              <span id="hdrChronicConditions">Chronic Medical Conditions</span>
+            </div>
+            <div class="history-entry-item">
+              <div class="history-entry-title-row">
+                <span class="history-entry-title">Essential Hypertension</span>
+                <span class="history-entry-badge badge-active">Controlled</span>
+              </div>
+              <div class="history-entry-meta">Diagnosed 2021 • Managed on Telmisartan 40mg OD • Avg BP 124/82 mmHg</div>
+            </div>
+            <div class="history-entry-item">
+              <div class="history-entry-title-row">
+                <span class="history-entry-title">Type 2 Diabetes Mellitus</span>
+                <span class="history-entry-badge badge-active">Controlled</span>
+              </div>
+              <div class="history-entry-meta">Diagnosed 2023 • Managed via Diet & Lifestyle • Latest HbA1c: 5.6%</div>
+            </div>
+          </div>
+
+          <!-- 2. Past Surgeries & Procedures -->
+          <div class="history-section-box">
+            <div class="history-section-header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              <span id="hdrPastSurgeries">Past Surgeries & Procedures</span>
+            </div>
+            <div class="history-entry-item">
+              <div class="history-entry-title-row">
+                <span class="history-entry-title">Laparoscopic Appendectomy</span>
+                <span class="history-entry-badge badge-resolved">Resolved (2018)</span>
+              </div>
+              <div class="history-entry-meta">Apollo Hospital New Delhi • Dr. R. Singhal • Full recovery</div>
+            </div>
+            <div class="history-entry-item">
+              <div class="history-entry-title-row">
+                <span class="history-entry-title">Right Radius Fracture ORIF</span>
+                <span class="history-entry-badge badge-resolved">Healed (2015)</span>
+              </div>
+              <div class="history-entry-meta">City Orthopedic Centre • Hardware removed in 2017</div>
+            </div>
+          </div>
+
+          <!-- 3. Allergies & Drug Reactions -->
+          <div class="history-section-box">
+            <div class="history-section-header" style="color: var(--color-emergency);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              </svg>
+              <span id="hdrAllergies">Known Allergies & Drug Reactions</span>
+            </div>
+            <div class="allergy-alert-card">
+              <div class="history-entry-title-row">
+                <strong style="color: var(--color-emergency); font-size: 13px;">⚠️ Penicillin / Amoxicillin</strong>
+                <span class="history-entry-badge" style="background: var(--color-emergency); color: white;">SEVERE ANAPHYLAXIS</span>
+              </div>
+              <div style="font-size: 11px; color: var(--color-emergency); margin-top: 3px;">
+                Causes severe urticaria, bronchospasm, and facial angioedema. Strictly contraindicated.
+              </div>
+            </div>
+            <div class="history-entry-item" style="margin-top: 4px;">
+              <div class="history-entry-title-row">
+                <span class="history-entry-title">Dust Mites & Grass Pollen</span>
+                <span class="history-entry-badge badge-active">Mild</span>
+              </div>
+              <div class="history-entry-meta">Seasonal allergic rhinitis during autumn</div>
+            </div>
+          </div>
+
+          <!-- 4. Immunization & Family History -->
+          <div class="history-section-box">
+            <div class="history-section-header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+              <span id="hdrImmunizations">Immunization & Family History</span>
+            </div>
+            <div class="history-entry-item">
+              <div class="history-entry-title-row">
+                <span class="history-entry-title">COVID-19 (Covishield) - 3 Doses</span>
+                <span class="history-entry-badge badge-resolved">CoWIN Verified</span>
+              </div>
+              <div class="history-entry-meta">Primary Series + Booster completed April 2022</div>
+            </div>
+            <div class="history-entry-item">
+              <div class="history-entry-title-row">
+                <span class="history-entry-title">Tetanus Toxoid (TT)</span>
+                <span class="history-entry-badge badge-resolved">Active (Nov 2023)</span>
+              </div>
+              <div class="history-entry-meta">Family: Father had CAD/MI at age 58; Mother has Type 2 Diabetes</div>
+            </div>
+          </div>
         </div>
 
-        <!-- Resource Selector Tabs -->
-        <div class="fhir-resource-nav">
-          <button class="fhir-res-tab active" id="fhirTabBundle" onclick="switchFhirTab('bundle')">Bundle (All)</button>
-          <button class="fhir-res-tab" id="fhirTabPatient" onclick="switchFhirTab('patient')">Patient</button>
-          <button class="fhir-res-tab" id="fhirTabMedications" onclick="switchFhirTab('medications')">MedicationRequest (3)</button>
-          <button class="fhir-res-tab" id="fhirTabCondition" onclick="switchFhirTab('condition')">Condition (Triage)</button>
-          <button class="fhir-res-tab" id="fhirTabEncounter" onclick="switchFhirTab('encounter')">Encounter</button>
-        </div>
-
-        <!-- Code Block Container -->
-        <div class="fhir-code-container" id="fhirCodeViewer">
-          <!-- Populated by JavaScript with syntax-highlighted JSON -->
-        </div>
-
-        <!-- HTTP Live Status Feedback -->
-        <div class="fhir-http-status-box" id="fhirStatusBox">
-          <span id="fhirStatusText">● Ready to exchange HL7 FHIR R4 Bundle over HTTPS</span>
-          <span id="fhirLatencyInfo">REST API: JSON (application/fhir+json)</span>
-        </div>
-
-        <!-- Action Controls -->
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <button class="btn-submit-action" style="flex: 1.3;" onclick="transmitFhirPost()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="16 16 12 12 8 16"></polyline>
-              <line x1="12" y1="12" x2="12" y2="21"></line>
-              <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
-            </svg>
-            <span>Transmit POST to FHIR Server</span>
+        <!-- Footer Actions -->
+        <div style="display: flex; gap: 10px; margin-top: 8px;">
+          <button class="btn-submit-action" style="flex: 1;" onclick="window.print()">
+            <span>Print Clinical History</span>
           </button>
-          <button class="btn-submit-action" style="flex: 1; background: #0f172a; border: 1px solid var(--border-strong);" onclick="downloadFhirJson()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            <span>Download .json</span>
-          </button>
-          <button class="btn-submit-action" style="flex: 1; background: #0f172a; border: 1px solid var(--border-strong);" onclick="copyFhirJson()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#93c5fd" stroke-width="2">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
-            <span>Copy JSON</span>
+          <button class="btn-submit-action" style="width: 120px; background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border-subtle);" onclick="closeModal('patientRecordsModal')">
+            <span>Close</span>
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Toast Container -->
+  <!-- Toast Notifications Container -->
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- ==========================================================================
-       6. Interactive JavaScript Engine
+       Interactive Engine JavaScript
        ========================================================================== -->
   <script src="app.js"></script>
 </body>
