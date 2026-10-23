@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedBuddy | Healthcare Portal & Smart Triage System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --primary-border: #bfdbfe;
+      --emerald: #10b981;
+      --emerald-light: #ecfdf5;
+      --emerald-border: #a7f3d0;
+      --amber: #f59e0b;
+      --purple: #8b5cf6;
+      --purple-hover: #7c3aed;
+      --purple-light: #f5f3ff;
+      --purple-border: #ddd6fe;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-300: #cbd5e1;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+      --white: #ffffff;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: #f8fafc;
+      color: var(--slate-800);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Ambient background gradient accents */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 380px;
+      background: linear-gradient(180deg, #eef4ff 0%, #f8fafc 100%);
+      z-index: -1;
+    }
+
+    /* Header */
+    .topbar {
+      height: 72px;
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--slate-200);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-logo-box {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+    }
+
+    .brand-logo-box svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .brand-text-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-title span {
+      color: var(--primary);
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--slate-500);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .system-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      background: var(--emerald-light);
+      border: 1px solid var(--emerald-border);
+      color: #065f46;
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      position: relative;
+    }
+
+    .status-dot::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.4);
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.6); opacity: 0; }
+    }
+
+    .quick-support-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--slate-200);
+      background: var(--white);
+      color: var(--slate-700);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .quick-support-btn:hover {
+      background: var(--slate-50);
+      border-color: var(--slate-300);
+      color: var(--slate-900);
+    }
+
+    /* Main Container */
+    .main-content {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* Hero intro */
+    .hero-section {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: 9999px;
+      background: var(--primary-light);
+      border: 1px solid var(--primary-border);
+      color: var(--primary);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 2.375rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      font-size: 1.0625rem;
+      color: var(--slate-600);
+      line-height: 1.6;
+    }
+
+    /* Portal Cards Row */
+    .portals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1240px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .portal-card {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem 1.5rem;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .portal-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: var(--shadow-xl);
+      transform: translateY(-3px);
+    }
+
+    .portal-card.card-admin {
+      border-top: 4px solid var(--primary);
+    }
+
+    .portal-card.card-doctor {
+      border-top: 4px solid var(--purple);
+    }
+
+    .portal-card.card-patient {
+      border-top: 4px solid var(--emerald);
+    }
+
+    .portal-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 1.25rem;
+    }
+
+    .portal-icon-wrapper {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-admin .portal-icon-wrapper {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid var(--primary-border);
+    }
+
+    .card-doctor .portal-icon-wrapper {
+      background: var(--purple-light);
+      color: var(--purple);
+      border: 1px solid var(--purple-border);
+    }
+
+    .card-patient .portal-icon-wrapper {
+      background: var(--emerald-light);
+      color: var(--emerald);
+      border: 1px solid var(--emerald-border);
+    }
+
+    .card-doctor .form-input:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+    }
+
+    .btn-doctor-submit {
+      background: var(--purple);
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+    }
+
+    .btn-doctor-submit:hover {
+      background: var(--purple-hover);
+      box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
+    }
+
+    .portal-meta h2 {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: 4px;
+    }
+
+    .portal-meta p {
+      font-size: 0.875rem;
+      color: var(--slate-500);
+      line-height: 1.45;
+    }
+
+    /* Form within cards */
+    .portal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--slate-700);
+    }
+
+    .form-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      color: var(--slate-400);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 44px;
+      padding: 0 14px 0 42px;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      font-size: 0.9375rem;
+      font-family: inherit;
+      color: var(--slate-800);
+      background-color: var(--slate-50);
+      transition: all 0.15s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      background-color: var(--white);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .card-patient .form-input:focus {
+      border-color: var(--emerald);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+    }
+
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px;
+      padding-right: 40px;
+    }
+
+    .form-row-remember {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8125rem;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--slate-600);
+      cursor: pointer;
+    }
+
+    .forgot-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Buttons */
+    .btn-submit {
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-radius: var(--radius-md);
+      font-family: var(--font-heading);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-admin-submit {
+      background: var(--primary);
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-admin-submit:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-patient-submit {
+      background: var(--emerald);
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-patient-submit:hover {
+      background: #059669;
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+    }
+
+    .demo-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 1rem 0;
+      color: var(--slate-400);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .demo-divider::before,
+    .demo-divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .demo-divider span {
+      padding: 0 10px;
+    }
+
+    .btn-quick-demo {
+      width: 100%;
+      height: 42px;
+      border: 1px dashed var(--slate-300);
+      border-radius: var(--radius-md);
+      background: var(--slate-50);
+      color: var(--slate-700);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-quick-demo:hover {
+      background: var(--slate-100);
+      border-color: var(--slate-400);
+      color: var(--slate-900);
+    }
+
+    .badge-demo {
+      padding: 2px 6px;
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #b45309;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      border-radius: 4px;
+    }
+
+    /* Key features banner */
+    .features-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      max-width: 1040px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .feature-box {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--slate-100);
+      color: var(--slate-700);
+    }
+
+    .feature-box h4 {
+      font-family: var(--font-heading);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    .feature-box p {
+      font-size: 0.8125rem;
+      color: var(--slate-500);
+      line-height: 1.4;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--slate-200);
+      background: var(--white);
+      padding: 1.5rem 2.5rem;
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8125rem;
+      color: var(--slate-500);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--slate-600);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Notification toast */
+    .portal-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--slate-900);
+      color: var(--white);
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 500;
+      box-shadow: var(--shadow-xl);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 9999;
+    }
+
+    .portal-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1040px) {
+      .portals-grid {
+        grid-template-columns: 1fr;
+      }
+      .features-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-title {
+        font-size: 1.875rem;
+      }
+      .topbar {
+        padding: 0 1.25rem;
+      }
+      .footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .features-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+    <a href="login.html" class="brand-wrap">
+      <div class="brand-logo-box">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+      </div>
+      <div class="brand-text-col">
+        <div class="brand-title">Med<span>Buddy</span></div>
+        <div class="brand-subtitle">Smart Hospital & Healthcare Network</div>
+      </div>
+    </a>
+
+    <div class="topbar-actions">
+      <div class="system-status-badge">
+        <span class="status-dot"></span>
+        <span>All Systems Operational</span>
+      </div>
+      <a href="mailto:support@medbuddy.health" class="quick-support-btn">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <span>IT Help Desk</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Hero & Gateway Selection -->
+  <main class="main-content">
+    
+    <section class="hero-section">
+      <div class="hero-badge">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        Unified Access Gateway • FHIR R4 Connected
+      </div>
+      <h1 class="hero-title">Select Your <span>Healthcare Portal</span></h1>
+      <p class="hero-description">
+        Choose your authorized portal below to manage administrative hospital operations or launch the AI-powered patient triage kiosk.
+      </p>
+    </section>
+
+    <!-- Dual Role Access Cards -->
+    <div class="portals-grid">
+
+      <!-- 1. Hospital Admin & Staff Portal -->
+      <section class="portal-card card-admin">
+        <div>
+          <div class="portal-header">
+            <div class="portal-icon-wrapper">
+              <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <div class="portal-meta">
+              <h2>Hospital Admin & Staff</h2>
+              <p>For administrative staff, department directors, and attending physicians.</p>
+            </div>
+          </div>
+
+          <form id="adminLoginForm" class="portal-form" onsubmit="handleAdminLogin(event)">
+            <div class="form-group">
+              <label class="form-label" for="adminEmail">Staff Email or ID</label>
+              <div class="form-input-wrap">
+                <span class="input-icon">
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </span>
+                <input type="text" id="adminEmail" class="form-input" placeholder="admin@medbuddy.health" value="admin@medbuddy.health" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="adminDepartment">Hospital Department</label>
+              <div class="form-input-wrap">
+                <span class="input-icon">
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+                  </svg>
+                </span>
+                <select id="adminDepartment" class="form-input form-select">
+                  <option value="admin">Central Administration</option>
+                  <option value="emergency">Emergency Medicine</option>
+                  <option value="cardio">Cardiology Department</option>
+                  <option value="neuro">Neurology Department</option>
+                  <option value="pediatrics">Pediatrics Department</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="adminPassword">Password</label>
+              <div class="form-input-wrap">
+                <span class="input-icon">
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </span>
+                <input type="password" id="adminPassword" class="form-input" placeholder="••••••••••••" value="hospitaladmin2026" required>
+              </div>
+            </div>
+
+            <div class="form-row-remember">
+              <label class="checkbox-label">
+                <input type="checkbox" checked>
+                <span>Remember this workstation</span>
+              </label>
+              <a href="javascript:void(0)" onclick="showToast('Password reset link sent to registered phone')" class="forgot-link">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn-submit btn-admin-submit">
+              <span>Sign In to Admin Dashboard</span>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <div>
+          <div class="demo-divider">
+            <span>Or Quick Access</span>
+          </div>
+
+          <a href="admin.html" class="btn-quick-demo" title="Directly launch the Hospital Admin page">
+            <span class="badge-demo">1-Click</span>
+            <span>⚡ Launch Hospital Admin (Demo)</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 2. Doctor & Physician Workstation Portal -->
+      <section class="portal-card card-doctor">
+        <div>
+          <div class="portal-header">
+            <div class="portal-icon-wrapper">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m-6-8h2" />
+              </svg>
+            </div>
+            <div class="portal-meta">
+              <h2>Doctor Portal</h2>
+              <p>For doctors: Patient records, shift schedule, clinical reports & staff calls.</p>
+            </div>
+          </div>
+
+          <form id="doctorLoginForm" class="portal-form" onsubmit="handleDoctorLogin(event)">
+            <div class="form-group">
+              <label class="form-label" for="docEmail">Doctor ID or Email</label>
+              <div class="form-input-wrap">
+                <span class="input-icon">
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </span>
+                <input type="text" id="docEmail" class="form-input" placeholder="DOC-4412" value="DOC-4412 (Dr. Arvind Varma)" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="docDepartment">Clinical Department</label>
+              <div class="form-input-wrap">
+                <span class="input-icon">
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                </span>
+                <select id="docDepartment" class="form-input form-select">
+                  <option value="cardio">Cardiology & Internal Medicine</option>
+                  <option value="neuro">Neurology Department</option>
+                  <option value="emergency">Emergency & Trauma</option>
+                  <option value="pediatrics">Pediatrics Department</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="docPassword">Doctor Password / PIN</label>
+              <div class="form-input-wrap">
+                <span class="input-icon">
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </span>
+                <input type="password" id="docPassword" class="form-input" placeholder="••••••••••••" value="doctor2026" required>
+              </div>
+            </div>
+
+            <div class="form-row-remember">
+              <label class="checkbox-label">
+                <input type="checkbox" checked>
+                <span>Remember session</span>
+              </label>
+              <span style="font-size: 0.75rem; color: var(--purple); font-weight: 600;">● Active Shift</span>
+            </div>
+
+            <button type="submit" class="btn-submit btn-doctor-submit">
+              <span>Sign In to Doctor Portal</span>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <div>
+          <div class="demo-divider">
+            <span>Or Quick Access</span>
+          </div>
+
+          <a href="doctor.html" class="btn-quick-demo" title="Directly launch the Doctor Workspace page">
+            <span class="badge-demo">1-Click</span>
+            <span>⚡ Launch Doctor Workspace (Demo)</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 3. Patient Smart Triage & ABHA Kiosk -->
+      <section class="portal-card card-patient">
+        <div>
+          <div class="portal-header">
+            <div class="portal-icon-wrapper">
+              <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <div class="portal-meta">
+              <h2>Patient Smart Triage Kiosk</h2>
+              <p>For patients and guardians: AI triage, ABHA sync, past records & queue registration.</p>
+            </div>
+          </div>
+
+          <form id="patientLoginForm" class="portal-form" onsubmit="handlePatientLogin(event)">
+            <div class="form-group">
+              <label class="form-label" for="patientIdInput">ABHA Number / Aadhaar / Mobile</label>
+              <div class="form-input-wrap">
+                <span class="input-icon">
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                  </svg>
+                </span>
+                <input type="text" id="patientIdInput" class="form-input" placeholder="e.g. 14-1234-5678-9012 or Mobile" value="9876543210" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="patientLanguage">Preferred Language (भाषा)</label>
+              <div class="form-input-wrap">
+                <span class="input-icon">
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                  </svg>
+                </span>
+                <select id="patientLanguage" class="form-input form-select">
+                  <option value="en">English (English)</option>
+                  <option value="hi">हिन्दी (Hindi)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="patientOtp">Verification PIN / Direct Check-in</label>
+              <div class="form-input-wrap">
+                <span class="input-icon">
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </span>
+                <input type="text" id="patientOtp" class="form-input" placeholder="Instant kiosk direct entry" value="Verified Session" readonly style="color: #059669; font-weight: 600;">
+              </div>
+            </div>
+
+            <div class="form-row-remember">
+              <label class="checkbox-label">
+                <input type="checkbox" checked>
+                <span>Sync with National Health ABHA DB</span>
+              </label>
+              <span style="font-size: 0.75rem; color: var(--emerald); font-weight: 600;">● Active</span>
+            </div>
+
+            <button type="submit" class="btn-submit btn-patient-submit">
+              <span>Start Patient Smart Triage</span>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <div>
+          <div class="demo-divider">
+            <span>Or Quick Access</span>
+          </div>
+
+          <a href="index.html" class="btn-quick-demo" title="Directly launch the Patient Smart Triage Kiosk">
+            <span class="badge-demo">1-Click</span>
+            <span>⚡ Launch Patient Triage Kiosk (Demo)</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Features / Hospital Integration Badges -->
+    <div class="features-row">
+      <div class="feature-box">
+        <div class="feature-icon">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+        </div>
+        <h4>FHIR R4 Compliant</h4>
+        <p>Interoperable electronic health records syncing silently with standard hospital systems.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <h4>Multi-ID Verification</h4>
+        <p>Seamlessly verified via ABHA ID, Aadhaar QR, or Indian Passport numbers.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          </svg>
+        </div>
+        <h4>Multilingual AI Triage</h4>
+        <p>Interactive medical symptom chatbot with English & Hindi bilingual guidance.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+        </div>
+        <h4>Real-Time Telemetry</h4>
+        <p>Live tracking of bed occupancy, active consultations, and doctor availability.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>
+      © 2026 <strong>MedBuddy</strong> Healthcare Systems. Smart India Hackathon 2026.
+    </div>
+    <div class="footer-links">
+      <a href="admin.html">Hospital Admin</a>
+      <a href="doctor.html">Doctor Portal</a>
+      <a href="index.html">Patient Triage Kiosk</a>
+      <a href="javascript:void(0)" onclick="showToast('HIPAA & NDHM / ABDM Compliant Protocol v2.4')">Compliance & Privacy</a>
+      <a href="javascript:void(0)" onclick="showToast('System operational. Server response: 18ms')">Server Status</a>
+    </div>
+  </footer>
+
+  <!-- Toast Notification element -->
+  <div id="portalToast" class="portal-toast">
+    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+    <span id="toastMessage">Authenticated successfully</span>
+  </div>
+
+  <script>
+    function showToast(msg) {
+      const toast = document.getElementById('portalToast');
+      const toastMsg = document.getElementById('toastMessage');
+      if (toast && toastMsg) {
+        toastMsg.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3200);
+      }
+    }
+
+    function handleAdminLogin(event) {
+      event.preventDefault();
+      showToast('Authenticating Administrator credentials...');
+      setTimeout(() => {
+        window.location.href = 'admin.html';
+      }, 700);
+    }
+
+    function handleDoctorLogin(event) {
+      event.preventDefault();
+      showToast('Authenticating Doctor credentials...');
+      setTimeout(() => {
+        window.location.href = 'doctor.html';
+      }, 700);
+    }
+
+
+    function handlePatientLogin(event) {
+      event.preventDefault();
+      const lang = document.getElementById('patientLanguage').value;
+      if (lang === 'hi') {
+        localStorage.setItem('medbuddy_lang', 'hi');
+      } else {
+        localStorage.setItem('medbuddy_lang', 'en');
+      }
+      showToast('Redirecting to Patient Smart Triage Kiosk...');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 700);
+    }
+  </script>
+</body>
+</html>
