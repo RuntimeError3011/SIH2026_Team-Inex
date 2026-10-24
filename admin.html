@@ -3,873 +3,987 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MedBuddy - Hospital Management System | Admin Dashboard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css">
+  <title>MedBuddy - Hospital Management System</title>
+  <link rel="icon" type="image/png" href="data:image/png;base64,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">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            medblue: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#0284c7',
+              600: '#026597',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            },
+            medteal: {
+              500: '#0d9488',
+              600: '#0f766e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+    <link rel="stylesheet" href="medbuddy.css">
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-500 selection:text-white">
 
-  <!-- ==========================================================================
-       Left Navigation Sidebar
-       ========================================================================== -->
-  <aside class="admin-sidebar">
-    <div>
-      <!-- Brand Logo Header -->
-      <a href="login.html" class="admin-brand" style="text-decoration: none; color: inherit;" title="Return to Portal Login">
-        <div class="brand-logo-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"></path>
-            <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"></path>
-            <circle cx="20" cy="10" r="2"></circle>
-          </svg>
+  <!-- MAIN WRAPPER -->
+  <div id="app" class="min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+
+    <!-- SIDEBAR - Clean Light Theme -->
+    <aside id="sidebar" class="w-full md:w-64 md:min-w-64 bg-white border-r border-slate-200 text-slate-700 flex-shrink-0 flex flex-col justify-between transition-all duration-300 shadow-sm z-20">
+      <div>
+        <!-- BRAND LOGO HEADER: preserved compact top-left branding -->
+        <div class="px-3 py-3 border-b border-slate-100 flex items-center justify-between gap-2 min-h-[76px] bg-white">
+          <button type="button" class="flex items-center justify-start flex-1 min-w-0 p-0 m-0 bg-transparent border-0 cursor-pointer" onclick="switchTab('dashboard')" aria-label="MedBuddy home">
+            <img src="data:image/png;base64,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" alt="MedBuddy" class="block w-full max-w-[205px] h-auto max-h-[56px] object-contain object-left flex-shrink-0" />
+          </button>
+          <button id="sidebarToggle" class="md:hidden flex-shrink-0 text-slate-400 hover:text-slate-600 p-1" onclick="toggleSidebar()" aria-label="Close navigation">
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
         </div>
-        <div class="brand-text">
-          <h1>MedBuddy</h1>
-          <p>Hospital Management System</p>
+
+        <!-- QUICK SWITCHER BADGE -->
+        <div class="px-4 py-2.5 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between text-xs text-slate-500">
+          <span class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span id="hospitalNameDisplay" class="font-medium text-slate-700">MedBuddy Central Hospital</span>
+          </span>
+          <span class="bg-sky-50 text-sky-600 font-semibold px-2 py-0.5 rounded text-[10px] border border-sky-200">v4.2 PRO</span>
         </div>
-      </a>
 
-      <!-- Navigation Links -->
-      <ul class="sidebar-nav-list">
-        <li>
-          <a href="#" class="sidebar-nav-item active">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-nav-item" onclick="openQuickModal('addUser')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-            <span>Users & Staff</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-nav-item" onclick="openQuickModal('registerPatient')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            <span>Patients</span>
-          </a>
-        </li>
-        <li>
-          <a href="doctor.html" class="sidebar-nav-item" title="Open Doctor Clinical Workspace">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"></path>
-              <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"></path>
-              <circle cx="20" cy="10" r="2"></circle>
-            </svg>
-            <span>Doctor Portal</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-nav-item" onclick="openQuickModal('bookAppointment')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            <span>Appointments</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M3 21h18"></path>
-              <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path>
-              <path d="M9 9h1"></path>
-              <path d="M9 13h1"></path>
-              <path d="M9 17h1"></path>
-              <path d="M14 9h1"></path>
-              <path d="M14 13h1"></path>
-              <path d="M14 17h1"></path>
-            </svg>
-            <span>Departments</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="12" y1="18" x2="12" y2="12"></line>
-              <line x1="9" y1="15" x2="15" y2="15"></line>
-            </svg>
-            <span>Medical Records</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-              <line x1="1" y1="10" x2="23" y2="10"></line>
-            </svg>
-            <span>Billing & Payments</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <line x1="18" y1="20" x2="18" y2="10"></line>
-              <line x1="12" y1="20" x2="12" y2="4"></line>
-              <line x1="6" y1="20" x2="6" y2="14"></line>
-            </svg>
-            <span>Reports</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-            </svg>
-            <span>Settings</span>
-          </a>
-        </li>
-      </ul>
-    </div>
+        <!-- NAVIGATION LINKS -->
+        <nav class="p-3 space-y-1 text-sm overflow-y-auto max-h-[calc(100vh-180px)]">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 pt-2 pb-1">Core Operations</div>
+          <button onclick="switchTab('dashboard')" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition text-left" data-tab="dashboard">
+            <i class="fa-solid fa-chart-line text-sky-500 w-5 text-center"></i>
+            <span class="font-medium">Dashboard</span>
+          </button>
+          <button onclick="switchTab('patients')" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition text-left" data-tab="patients">
+            <i class="fa-solid fa-user-injured text-emerald-500 w-5 text-center"></i>
+            <span class="font-medium">Patients Registry</span>
+          </button>
+          <button onclick="switchTab('doctors')" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition text-left" data-tab="doctors">
+            <i class="fa-solid fa-user-md text-indigo-500 w-5 text-center"></i>
+            <span class="font-medium">Doctor Directory</span>
+          </button>
+          <button onclick="switchTab('appointments')" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition text-left" data-tab="appointments">
+            <i class="fa-solid fa-calendar-check text-purple-500 w-5 text-center"></i>
+            <span class="font-medium">Appointments</span>
+          </button>
 
-    <!-- Bottom Help & Support Card -->
-    <div class="sidebar-help-card" onclick="showToast('Help Desk connected. Support available 24/7.')">
-      <div class="help-icon-circle">?</div>
-      <div class="help-text">
-        <h4>Help & Support</h4>
-        <p>Get assistance when you need it</p>
-      </div>
-    </div>
-  </aside>
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 pt-4 pb-1">Clinical & Departments</div>
+          <button onclick="switchTab('departments')" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition text-left" data-tab="departments">
+            <i class="fa-solid fa-hospital-user text-amber-500 w-5 text-center"></i>
+            <span class="font-medium">Departments & Services</span>
+          </button>
+          <button onclick="switchTab('admissions')" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition text-left" data-tab="admissions">
+            <i class="fa-solid fa-bed text-teal-500 w-5 text-center"></i>
+            <span class="font-medium">Admission & Bed</span>
+          </button>
+          <button onclick="switchTab('diagnostics')" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition text-left" data-tab="diagnostics">
+            <i class="fa-solid fa-vial text-cyan-500 w-5 text-center"></i>
+            <span class="font-medium">Diagnostics Repository</span>
+          </button>
 
-  <!-- ==========================================================================
-       Main Dashboard Content Area
-       ========================================================================== -->
-  <div class="admin-main-wrapper">
-
-    <!-- Top Sticky Header Bar -->
-    <header class="admin-header">
-      <!-- Search Input -->
-      <div class="header-search-bar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input type="text" class="header-search-input" id="headerSearchInput" placeholder="Search patients, doctors, departments...">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 pt-4 pb-1">Administration</div>
+          <button onclick="switchTab('billing')" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition text-left" data-tab="billing">
+            <i class="fa-solid fa-file-invoice-dollar text-emerald-600 w-5 text-center"></i>
+            <span class="font-medium">Billing & Payments</span>
+          </button>
+          <button onclick="switchTab('users')" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition text-left" data-tab="users">
+            <i class="fa-solid fa-users-gear text-blue-500 w-5 text-center"></i>
+            <span class="font-medium">Users & Staff</span>
+          </button>
+          <button onclick="switchTab('settings')" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition text-left" data-tab="settings">
+            <i class="fa-solid fa-sliders text-slate-400 w-5 text-center"></i>
+            <span class="font-medium">System Settings</span>
+          </button>
+        </nav>
       </div>
 
-      <!-- Right Header Actions -->
-      <div class="header-right-actions">
-        <!-- Doctor Portal Link -->
-        <a href="doctor.html" class="notification-bell-btn" style="width: auto; padding: 0 12px; gap: 6px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; color: #7c3aed;" title="Switch to Doctor Clinical Workspace">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-          </svg>
-          <span>Doctor Portal</span>
-        </a>
-
-        <!-- Patient Kiosk Link -->
-        <a href="index.html" class="notification-bell-btn" style="width: auto; padding: 0 12px; gap: 6px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; color: #2563eb;" title="Switch to Patient Smart Triage Kiosk">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
-          </svg>
-          <span>Patient Kiosk</span>
-        </a>
-
-        <!-- Notification Bell -->
-        <button class="notification-bell-btn" title="3 New Hospital Notifications" onclick="showToast('You have 3 unread emergency hospital alerts.')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-          <span class="bell-badge">3</span>
+      <!-- FOOTER USER PROFILE -->
+      <div class="p-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-sm border border-sky-200">
+            <span id="userAvatarText">AD</span>
+          </div>
+          <div class="text-xs overflow-hidden">
+            <div id="sidebarUserName" class="font-semibold text-slate-800 truncate">Dr. Alex Danvers</div>
+            <div id="sidebarUserRole" class="text-slate-500 truncate">Chief Medical Admin</div>
+          </div>
+        </div>
+        <button onclick="switchTab('settings')" title="Account Settings" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-200/60 transition">
+          <i class="fa-solid fa-gear"></i>
         </button>
-
-        <!-- Admin Profile Pill -->
-        <div class="admin-profile-pill" id="adminProfilePill" onclick="toggleProfileDropdown()">
-          <div class="admin-avatar">AD</div>
-          <div class="admin-profile-info">
-            <div class="admin-name">Admin</div>
-            <div class="admin-role">System Administrator</div>
-          </div>
-
-          <!-- Profile Dropdown Menu -->
-          <div class="profile-dropdown-menu" id="profileDropdownMenu">
-            <div class="dropdown-item" onclick="launchPatientKiosk()">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                <line x1="8" y1="21" x2="16" y2="21"></line>
-                <line x1="12" y1="17" x2="12" y2="21"></line>
-              </svg>
-              <span>Launch Patient Kiosk</span>
-            </div>
-            <div class="dropdown-item" onclick="showToast('Opening Administrator Profile settings.')">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-              <span>My Profile</span>
-            </div>
-            <div class="dropdown-divider"></div>
-            <div class="dropdown-item" style="color: #ef4444;" onclick="logoutAdmin()">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                <polyline points="16 17 21 12 16 7"></polyline>
-                <line x1="21" y1="12" x2="9" y2="12"></line>
-              </svg>
-              <span>Logout</span>
-            </div>
-          </div>
-        </div>
       </div>
-    </header>
+    </aside>
 
-    <!-- Admin Content Canvas -->
-    <main class="admin-content">
+    <!-- MAIN CONTENT AREA -->
+    <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
 
-      <!-- Welcome Greeting Row -->
-      <div class="welcome-banner-row">
-        <div class="welcome-title-group">
-          <h2>Welcome back, Admin!</h2>
-          <p>Here's what's happening at MedBuddy Hospital today.</p>
-        </div>
-
-        <div class="welcome-filters">
-          <div class="filter-pill" onclick="showToast('Date range selected: Thu, Oct 23, 2026')">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            <span>Thu, Oct 23, 2026</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-          </div>
-
-          <div class="filter-pill" onclick="showToast('Filtered view: Today')">
-            <span>Today</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <!-- ======================================================================
-           Row 1: 4 Top KPI Metric Cards
-           ====================================================================== -->
-      <section class="metrics-cards-grid">
-        <!-- Metric Card 1: Total Patients -->
-        <div class="metric-card">
-          <div class="metric-icon-box blue">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-          </div>
-          <div class="metric-info">
-            <div class="metric-label">Total Patients</div>
-            <div class="metric-value">1,284</div>
-            <div class="metric-sub positive">
-              <span>↑ 12.5%</span>
-              <span style="color: var(--text-dim); font-weight: normal;">vs. last week</span>
-            </div>
+      <!-- TOPBAR -->
+      <header class="bg-white border-b border-slate-200 px-4 py-3 flex items-center justify-between sticky top-0 z-10 shadow-sm">
+        <div class="flex items-center space-x-3">
+          <button onclick="toggleSidebar()" class="md:hidden text-slate-600 hover:text-slate-900 p-2 rounded-lg bg-slate-100">
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+          <div class="relative w-48 sm:w-72">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+            <input type="text" id="globalSearchInput" onkeyup="handleGlobalSearch(this.value)" placeholder="Global search (Patients, Doctors)..." class="w-full pl-9 pr-3 py-1.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition">
+            <div id="globalSearchResults" class="hidden absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-xl border border-slate-200 z-50 max-h-72 overflow-y-auto p-2 text-xs space-y-1"></div>
           </div>
         </div>
 
-        <!-- Metric Card 2: Appointments -->
-        <div class="metric-card">
-          <div class="metric-icon-box purple">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-          </div>
-          <div class="metric-info">
-            <div class="metric-label">Appointments</div>
-            <div class="metric-value">48</div>
-            <div class="metric-sub positive">
-              <span>↑ 8.2%</span>
-              <span style="color: var(--text-dim); font-weight: normal;">vs. last week</span>
-            </div>
-          </div>
-        </div>
+        <div class="flex items-center space-x-2 sm:space-x-4">
+          <!-- QUICK EMERGENCY ACTION -->
+          <button onclick="openModal('patientModal')" class="bg-rose-500 hover:bg-rose-600 text-white font-medium px-3.5 py-1.5 rounded-xl text-xs sm:text-sm flex items-center space-x-1.5 shadow-sm transition">
+            <i class="fa-solid fa-plus-circle"></i>
+            <span class="hidden sm:inline">Admit / Register</span>
+          </button>
 
-        <!-- Metric Card 3: Available Doctors -->
-        <div class="metric-card">
-          <div class="metric-icon-box green">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"></path>
-              <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"></path>
-              <circle cx="20" cy="10" r="2"></circle>
-            </svg>
-          </div>
-          <div class="metric-info">
-            <div class="metric-label">Available Doctors</div>
-            <div class="metric-value">32</div>
-            <div class="metric-sub neutral">
-              <span>Across 8 departments</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Metric Card 4: Bed Occupancy -->
-        <div class="metric-card">
-          <div class="metric-icon-box orange">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M2 4v16"></path>
-              <path d="M2 8h18a2 2 0 0 1 2 2v10"></path>
-              <path d="M2 17h20"></path>
-              <circle cx="6" cy="12" r="2"></circle>
-            </svg>
-          </div>
-          <div class="metric-info">
-            <div class="metric-label">Bed Occupancy</div>
-            <div class="metric-value">76%</div>
-            <div class="metric-progress-track">
-              <div class="metric-progress-fill" style="width: 76%;"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ======================================================================
-           Row 2: 3 Columns (Patient Visits Chart, Department Overview, Quick Actions)
-           ====================================================================== -->
-      <section class="middle-dashboard-grid">
-        <!-- Column 1: Patient Visits Line Chart -->
-        <div class="dashboard-card" style="position: relative;">
-          <div class="card-header-row">
-            <div class="card-title">Patient Visits <span style="font-weight: normal; color: var(--text-dim); font-size: 13px;">(Last 7 Days)</span></div>
-          </div>
-
-          <div class="chart-container">
-            <!-- Tooltip -->
-            <div id="chartTooltip" style="position: absolute; display: none; background: #0f172a; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; pointer-events: none; z-index: 10;"></div>
-
-            <svg class="chart-svg" viewBox="0 0 460 180" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.3"></stop>
-                  <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.0"></stop>
-                </linearGradient>
-              </defs>
-
-              <!-- Grid Lines -->
-              <line x1="30" y1="20" x2="440" y2="20" class="chart-grid-line"></line>
-              <text x="5" y="24" class="chart-axis-label">150</text>
-
-              <line x1="30" y1="65" x2="440" y2="65" class="chart-grid-line"></line>
-              <text x="5" y="69" class="chart-axis-label">100</text>
-
-              <line x1="30" y1="110" x2="440" y2="110" class="chart-grid-line"></line>
-              <text x="12" y="114" class="chart-axis-label">50</text>
-
-              <line x1="30" y1="155" x2="440" y2="155" class="chart-grid-line"></line>
-              <text x="18" y="159" class="chart-axis-label">0</text>
-
-              <!-- Line Chart Area & Stroke -->
-              <!-- Mon(50, 105), Tue(110, 85), Wed(170, 85), Thu(230, 48), Fri(290, 80), Sat(350, 115), Sun(410, 75) -->
-              <path class="chart-area" d="M 50 105 L 110 85 L 170 85 L 230 48 L 290 80 L 350 115 L 410 75 L 410 155 L 50 155 Z"></path>
-              <path class="chart-line" d="M 50 105 L 110 85 L 170 85 L 230 48 L 290 80 L 350 115 L 410 75"></path>
-
-              <!-- Data Points with Hover Detection -->
-              <circle class="chart-point" cx="50" cy="105" r="4" data-day="Mon" data-val="60"></circle>
-              <circle class="chart-point" cx="110" cy="85" r="4" data-day="Tue" data-val="75"></circle>
-              <circle class="chart-point" cx="170" cy="85" r="4" data-day="Wed" data-val="75"></circle>
-              <circle class="chart-point" cx="230" cy="48" r="4" data-day="Thu" data-val="110"></circle>
-              <circle class="chart-point" cx="290" cy="80" r="4" data-day="Fri" data-val="80"></circle>
-              <circle class="chart-point" cx="350" cy="115" r="4" data-day="Sat" data-val="50"></circle>
-              <circle class="chart-point" cx="410" cy="75" r="4" data-day="Sun" data-val="85"></circle>
-
-              <!-- X Axis Labels -->
-              <text x="40" y="174" class="chart-axis-label">Mon</text>
-              <text x="100" y="174" class="chart-axis-label">Tue</text>
-              <text x="160" y="174" class="chart-axis-label">Wed</text>
-              <text x="220" y="174" class="chart-axis-label">Thu</text>
-              <text x="280" y="174" class="chart-axis-label">Fri</text>
-              <text x="340" y="174" class="chart-axis-label">Sat</text>
-              <text x="400" y="174" class="chart-axis-label">Sun</text>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Column 2: Department Overview -->
-        <div class="dashboard-card">
-          <div class="card-header-row">
-            <div class="card-title">Department Overview</div>
-          </div>
-          <div class="dept-list">
-            <div class="dept-item">
-              <span class="dept-name">Cardiology</span>
-              <span class="dept-count">124</span>
-              <div class="dept-bar-track">
-                <div class="dept-bar-fill" style="width: 78%;"></div>
-              </div>
-              <span class="dept-percent">78%</span>
-            </div>
-            <div class="dept-item">
-              <span class="dept-name">Orthopedics</span>
-              <span class="dept-count">96</span>
-              <div class="dept-bar-track">
-                <div class="dept-bar-fill" style="width: 62%;"></div>
-              </div>
-              <span class="dept-percent">62%</span>
-            </div>
-            <div class="dept-item">
-              <span class="dept-name">Neurology</span>
-              <span class="dept-count">72</span>
-              <div class="dept-bar-track">
-                <div class="dept-bar-fill" style="width: 48%;"></div>
-              </div>
-              <span class="dept-percent">48%</span>
-            </div>
-            <div class="dept-item">
-              <span class="dept-name">General Medicine</span>
-              <span class="dept-count">185</span>
-              <div class="dept-bar-track">
-                <div class="dept-bar-fill" style="width: 90%;"></div>
-              </div>
-              <span class="dept-percent">90%</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Column 3: Quick Actions -->
-        <div class="dashboard-card">
-          <div class="card-header-row">
-            <div class="card-title">Quick Actions</div>
-          </div>
-          <div class="quick-actions-list">
-            <button class="btn-action-primary" onclick="openQuickModal('addUser')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-              <span>+ Add New User</span>
+          <!-- NOTIFICATION POPOVER TOGGLE -->
+          <div class="relative">
+            <button onclick="toggleNotifications()" class="relative p-2 text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-100 transition">
+              <i class="fa-solid fa-bell text-lg"></i>
+              <span id="notifBadge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-rose-500 rounded-full ring-2 ring-white"></span>
             </button>
-            <button class="btn-action-outline" onclick="openQuickModal('registerPatient')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
-              <span>Register Patient</span>
-            </button>
-            <button class="btn-action-outline" onclick="openQuickModal('bookAppointment')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <polyline points="21 15 16 10 5 21"></polyline>
-              </svg>
-              <span>Book Appointment</span>
-            </button>
-            <button class="btn-action-outline" onclick="openQuickModal('addDoctor')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"></path>
-                <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"></path>
-                <circle cx="20" cy="10" r="2"></circle>
-              </svg>
-              <span>Add Doctor</span>
-            </button>
-            <button class="btn-action-outline" onclick="openQuickModal('newAdmission')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M2 4v16"></path>
-                <path d="M2 8h18a2 2 0 0 1 2 2v10"></path>
-                <path d="M2 17h20"></path>
-              </svg>
-              <span>New Admission</span>
+            <div id="notifDropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-slate-200 z-50 p-3 space-y-2">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <span class="font-bold text-xs uppercase tracking-wider text-slate-700">Live Hospital Alerts</span>
+                <span class="text-[10px] text-sky-600 cursor-pointer font-semibold" onclick="clearNotifs()">Clear All</span>
+              </div>
+              <div id="notifList" class="space-y-2 max-h-60 overflow-y-auto text-xs">
+                <!-- Dynamic items -->
+              </div>
+            </div>
+          </div>
+
+          <!-- TIME STAMP -->
+          <div class="hidden lg:flex flex-col text-right">
+            <span id="liveTime" class="text-xs font-bold text-slate-700">10:42 AM</span>
+            <span id="liveDate" class="text-[10px] text-slate-500">24 Oct 2026</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- DYNAMIC WORKSPACE CONTENT -->
+      <main id="mainWorkspace" class="flex-1 overflow-y-auto p-4 sm:p-6 bg-slate-50/50">
+        
+        <!-- DASHBOARD VIEW -->
+        <section id="view-dashboard" class="space-y-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-slate-800">Hospital Overview</h1>
+              <p class="text-xs text-slate-500">Real-time occupancy, appointment flow, and operational analytics</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="refreshDashboard()" class="bg-white border border-slate-200 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-arrows-rotate"></i> Refresh
+              </button>
+              <button onclick="switchTab('billing')" class="bg-sky-600 text-white px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-sky-700 flex items-center gap-1.5 shadow">
+                <i class="fa-solid fa-receipt"></i> Create Invoice
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI METRICS GRID -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
+              <div>
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Patients</p>
+                <h3 id="statTotalPatients" class="text-2xl font-bold text-slate-800 mt-1">1,248</h3>
+                <span class="text-[11px] font-medium text-emerald-600 flex items-center gap-1 mt-1">
+                  <i class="fa-solid fa-arrow-up"></i> +12.4% this week
+                </span>
+              </div>
+              <div class="w-12 h-12 bg-sky-50 text-sky-600 rounded-2xl flex items-center justify-center text-xl border border-sky-100">
+                <i class="fa-solid fa-user-injured"></i>
+              </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
+              <div>
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Today's Appointments</p>
+                <h3 id="statTodayAppts" class="text-2xl font-bold text-slate-800 mt-1">42</h3>
+                <span class="text-[11px] font-medium text-amber-600 flex items-center gap-1 mt-1">
+                  <i class="fa-solid fa-clock"></i> 8 pending consultation
+                </span>
+              </div>
+              <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center text-xl border border-purple-100">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
+              <div>
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Bed Occupancy</p>
+                <h3 id="statBedOccupancy" class="text-2xl font-bold text-slate-800 mt-1">82%</h3>
+                <span class="text-[11px] font-medium text-rose-600 flex items-center gap-1 mt-1">
+                  <i class="fa-solid fa-bed"></i> 18 beds available
+                </span>
+              </div>
+              <div class="w-12 h-12 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center text-xl border border-teal-100">
+                <i class="fa-solid fa-bed"></i>
+              </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
+              <div>
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Lab Requisitions</p>
+                <h3 id="statLabTests" class="text-2xl font-bold text-slate-800 mt-1">19</h3>
+                <span class="text-[11px] font-medium text-sky-600 flex items-center gap-1 mt-1">
+                  <i class="fa-solid fa-flask"></i> 6 reports ready
+                </span>
+              </div>
+              <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-xl border border-amber-100">
+                <i class="fa-solid fa-microscope"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE VISUAL CHART & DEPT PROGRESS -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- 7-DAY VISITS CHART -->
+            <div class="lg:col-span-2 bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <h3 class="font-bold text-slate-800 text-base">Weekly Patient Footfall</h3>
+                  <p class="text-xs text-slate-500">OPD admissions vs Emergency visits</p>
+                </div>
+                <div class="flex items-center space-x-3 text-xs">
+                  <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-sky-500"></span> OPD</span>
+                  <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-400"></span> ER</span>
+                </div>
+              </div>
+              <!-- CSS Custom Dynamic Bar Visualization -->
+              <div class="h-56 flex items-end justify-between gap-3 pt-6 border-b border-slate-100 pb-2">
+                <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group cursor-pointer relative">
+                  <div class="absolute -top-8 bg-slate-800 text-white text-[10px] px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition">65 OPD / 20 ER</div>
+                  <div class="w-full bg-emerald-400 rounded-t h-[20%] transition-all group-hover:brightness-105"></div>
+                  <div class="w-full bg-sky-500 rounded-b h-[60%] transition-all group-hover:brightness-105"></div>
+                  <span class="text-xs font-semibold text-slate-500 mt-2">Mon</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group cursor-pointer relative">
+                  <div class="absolute -top-8 bg-slate-800 text-white text-[10px] px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition">80 OPD / 25 ER</div>
+                  <div class="w-full bg-emerald-400 rounded-t h-[25%] transition-all group-hover:brightness-105"></div>
+                  <div class="w-full bg-sky-500 rounded-b h-[75%] transition-all group-hover:brightness-105"></div>
+                  <span class="text-xs font-semibold text-slate-500 mt-2">Tue</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group cursor-pointer relative">
+                  <div class="absolute -top-8 bg-slate-800 text-white text-[10px] px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition">70 OPD / 15 ER</div>
+                  <div class="w-full bg-emerald-400 rounded-t h-[15%] transition-all group-hover:brightness-105"></div>
+                  <div class="w-full bg-sky-500 rounded-b h-[68%] transition-all group-hover:brightness-105"></div>
+                  <span class="text-xs font-semibold text-slate-500 mt-2">Wed</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group cursor-pointer relative">
+                  <div class="absolute -top-8 bg-slate-800 text-white text-[10px] px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition">95 OPD / 30 ER</div>
+                  <div class="w-full bg-emerald-400 rounded-t h-[30%] transition-all group-hover:brightness-105"></div>
+                  <div class="w-full bg-sky-500 rounded-b h-[85%] transition-all group-hover:brightness-105"></div>
+                  <span class="text-xs font-semibold text-slate-500 mt-2">Thu</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group cursor-pointer relative">
+                  <div class="absolute -top-8 bg-slate-800 text-white text-[10px] px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition">110 OPD / 35 ER</div>
+                  <div class="w-full bg-emerald-400 rounded-t h-[35%] transition-all group-hover:brightness-105"></div>
+                  <div class="w-full bg-sky-500 rounded-b h-[90%] transition-all group-hover:brightness-105"></div>
+                  <span class="text-xs font-semibold text-slate-500 mt-2">Fri</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group cursor-pointer relative">
+                  <div class="absolute -top-8 bg-slate-800 text-white text-[10px] px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition">50 OPD / 40 ER</div>
+                  <div class="w-full bg-emerald-400 rounded-t h-[40%] transition-all group-hover:brightness-105"></div>
+                  <div class="w-full bg-sky-500 rounded-b h-[45%] transition-all group-hover:brightness-105"></div>
+                  <span class="text-xs font-semibold text-slate-500 mt-2">Sat</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group cursor-pointer relative">
+                  <div class="absolute -top-8 bg-slate-800 text-white text-[10px] px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition">40 OPD / 45 ER</div>
+                  <div class="w-full bg-emerald-400 rounded-t h-[45%] transition-all group-hover:brightness-105"></div>
+                  <div class="w-full bg-sky-500 rounded-b h-[35%] transition-all group-hover:brightness-105"></div>
+                  <span class="text-xs font-semibold text-slate-500 mt-2">Sun</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- DEPARTMENT LOAD STATUS -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col justify-between">
+              <div class="flex justify-between items-center mb-3">
+                <h3 class="font-bold text-slate-800 text-base">Department Capacity</h3>
+                <span class="text-xs text-sky-600 font-semibold cursor-pointer" onclick="switchTab('departments')">View All</span>
+              </div>
+              <div class="space-y-3" id="dashDeptLoadContainer">
+                <!-- JS populated -->
+              </div>
+            </div>
+          </div>
+
+          <!-- RECENT PATIENTS & REQUISITION FEED -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- RECENT PATIENTS TABLE -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="font-bold text-slate-800 text-base">Recent Registrations</h3>
+                <button onclick="switchTab('patients')" class="text-xs text-sky-600 hover:underline font-semibold">Manage Patients</button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                  <thead class="bg-slate-50 text-slate-500 uppercase tracking-wider">
+                    <tr>
+                      <th class="p-2.5 rounded-l-lg">Patient</th>
+                      <th class="p-2.5">Doctor</th>
+                      <th class="p-2.5">Dept</th>
+                      <th class="p-2.5 rounded-r-lg">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashRecentPatientsTbody" class="divide-y divide-slate-100">
+                    <!-- JS populated -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- REQUISITION STREAM -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="font-bold text-slate-800 text-base">Live Lab Requisitions</h3>
+                <button onclick="switchTab('diagnostics')" class="text-xs text-sky-600 hover:underline font-semibold">Open Lab Repo</button>
+              </div>
+              <div id="dashLabFeedContainer" class="space-y-2 max-h-60 overflow-y-auto">
+                <!-- JS populated -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PATIENTS WORKSPACE -->
+        <section id="view-patients" class="hidden space-y-4">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-slate-800">Patients Registry</h1>
+              <p class="text-xs text-slate-500">Directory of registered outpatients and inpatients</p>
+            </div>
+            <button onclick="openModal('patientModal')" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow-sm transition">
+              <i class="fa-solid fa-user-plus"></i> New Patient Registration
             </button>
           </div>
-        </div>
-      </section>
 
-      <!-- ======================================================================
-           Row 3: 3 Columns (Recent Patients Table, Recent Activity, System Overview)
-           ====================================================================== -->
-      <section class="bottom-dashboard-grid">
-        <!-- Column 1: Recent Patients Table -->
-        <div class="dashboard-card">
-          <div class="card-header-row">
-            <div class="card-title" style="display:flex; align-items:center; gap:8px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-              </svg>
-              <span>Recent Patients</span>
+          <!-- TABLE CONTROLS -->
+          <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col sm:flex-row gap-3 justify-between items-center">
+            <div class="relative w-full sm:w-72">
+              <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+              <input type="text" id="patientSearchInput" onkeyup="renderPatientsTable()" placeholder="Filter by name, phone, MRN..." class="w-full pl-8 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500">
             </div>
-            <a href="#" class="card-link" onclick="showToast('Viewing all 1,284 hospital records.')">View All</a>
-          </div>
-
-          <div style="overflow-x: auto;">
-            <table class="patients-table" id="recentPatientsTable">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Age</th>
-                  <th>Gender</th>
-                  <th>Department</th>
-                  <th>Visit Date</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="patient-id-cell">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="7" r="4"></circle>
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                      </svg>
-                      <span>PT-1042</span>
-                    </div>
-                  </td>
-                  <td style="font-weight: 700;">Aarav Sharma</td>
-                  <td>45</td>
-                  <td>Male</td>
-                  <td>Cardiology</td>
-                  <td>Oct 23, 2026</td>
-                  <td><span class="status-badge checked-in">Checked In</span></td>
-                  <td><button class="table-action-dots" onclick="showToast('Actions for PT-1042 Aarav Sharma')">⋮</button></td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <div class="patient-id-cell">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="7" r="4"></circle>
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                      </svg>
-                      <span>PT-1043</span>
-                    </div>
-                  </td>
-                  <td style="font-weight: 700;">Priya Patel</td>
-                  <td>32</td>
-                  <td>Female</td>
-                  <td>Orthopedics</td>
-                  <td>Oct 23, 2026</td>
-                  <td><span class="status-badge scheduled">Scheduled</span></td>
-                  <td><button class="table-action-dots" onclick="showToast('Actions for PT-1043 Priya Patel')">⋮</button></td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <div class="patient-id-cell">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="7" r="4"></circle>
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                      </svg>
-                      <span>PT-1044</span>
-                    </div>
-                  </td>
-                  <td style="font-weight: 700;">Rohan Gupta</td>
-                  <td>28</td>
-                  <td>Male</td>
-                  <td>Neurology</td>
-                  <td>Oct 22, 2026</td>
-                  <td><span class="status-badge consultation">In Consultation</span></td>
-                  <td><button class="table-action-dots" onclick="showToast('Actions for PT-1044 Rohan Gupta')">⋮</button></td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <div class="patient-id-cell">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="7" r="4"></circle>
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                      </svg>
-                      <span>PT-1045</span>
-                    </div>
-                  </td>
-                  <td style="font-weight: 700;">Ananya Singh</td>
-                  <td>36</td>
-                  <td>Female</td>
-                  <td>General Medicine</td>
-                  <td>Oct 22, 2026</td>
-                  <td><span class="status-badge scheduled">Scheduled</span></td>
-                  <td><button class="table-action-dots" onclick="showToast('Actions for PT-1045 Ananya Singh')">⋮</button></td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <div class="patient-id-cell">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="7" r="4"></circle>
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                      </svg>
-                      <span>PT-1046</span>
-                    </div>
-                  </td>
-                  <td style="font-weight: 700;">Ishan Kumar</td>
-                  <td>12</td>
-                  <td>Male</td>
-                  <td>Pediatrics</td>
-                  <td>Oct 22, 2026</td>
-                  <td><span class="status-badge completed">Completed</span></td>
-                  <td><button class="table-action-dots" onclick="showToast('Actions for PT-1046 Ishan Kumar')">⋮</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Column 2: Recent Activity -->
-        <div class="dashboard-card">
-          <div class="card-header-row">
-            <div class="card-title" style="display:flex; align-items:center; gap:8px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-              <span>Recent Activity</span>
-            </div>
-            <a href="#" class="card-link" onclick="showToast('Loading full system activity audit log.')">View All</a>
-          </div>
-
-          <div class="activity-feed-list">
-            <!-- Event 1 -->
-            <div class="activity-feed-item">
-              <div class="activity-icon-circle green">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="8.5" cy="7" r="4"></circle>
-                  <line x1="20" y1="8" x2="20" y2="14"></line>
-                  <line x1="23" y1="11" x2="17" y2="11"></line>
-                </svg>
-              </div>
-              <div class="activity-details">
-                <div class="activity-action-title">New patient registered</div>
-                <div class="activity-subtext">Aarav Sharma (PT-1042)</div>
-              </div>
-              <div class="activity-time">2 mins ago</div>
-            </div>
-
-            <!-- Event 2 -->
-            <div class="activity-feed-item">
-              <div class="activity-icon-circle purple">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                  <line x1="16" y1="2" x2="16" y2="6"></line>
-                  <line x1="8" y1="2" x2="8" y2="6"></line>
-                  <line x1="3" y1="10" x2="21" y2="10"></line>
-                </svg>
-              </div>
-              <div class="activity-details">
-                <div class="activity-action-title">Appointment booked</div>
-                <div class="activity-subtext">Priya Patel (AP-2031)</div>
-              </div>
-              <div class="activity-time">12 mins ago</div>
-            </div>
-
-            <!-- Event 3 -->
-            <div class="activity-feed-item">
-              <div class="activity-icon-circle purple">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"></path>
-                  <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"></path>
-                  <circle cx="20" cy="10" r="2"></circle>
-                </svg>
-              </div>
-              <div class="activity-details">
-                <div class="activity-action-title">Doctor added</div>
-                <div class="activity-subtext">Dr. Meera Shah (Cardiology)</div>
-              </div>
-              <div class="activity-time">35 mins ago</div>
-            </div>
-
-            <!-- Event 4 -->
-            <div class="activity-feed-item">
-              <div class="activity-icon-circle teal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="2" y="5" width="20" height="14" rx="2"></rect>
-                  <line x1="2" y1="10" x2="22" y2="10"></line>
-                </svg>
-              </div>
-              <div class="activity-details">
-                <div class="activity-action-title">Payment received</div>
-                <div class="activity-subtext">₹2,500 - PT-1041</div>
-              </div>
-              <div class="activity-time">1 hour ago</div>
-            </div>
-
-            <!-- Event 5 -->
-            <div class="activity-feed-item">
-              <div class="activity-icon-circle orange">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M2 4v16"></path>
-                  <path d="M2 8h18a2 2 0 0 1 2 2v10"></path>
-                  <path d="M2 17h20"></path>
-                </svg>
-              </div>
-              <div class="activity-details">
-                <div class="activity-action-title">Bed assigned</div>
-                <div class="activity-subtext">Bed 12 - General Ward</div>
-              </div>
-              <div class="activity-time">2 hours ago</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Column 3: System Overview -->
-        <div class="dashboard-card">
-          <div class="card-header-row">
-            <div class="card-title" style="display:flex; align-items:center; gap:8px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
-                <line x1="18" y1="20" x2="18" y2="10"></line>
-                <line x1="12" y1="20" x2="12" y2="4"></line>
-                <line x1="6" y1="20" x2="6" y2="14"></line>
-              </svg>
-              <span>System Overview</span>
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+              <select id="patientStatusFilter" onchange="renderPatientsTable()" class="bg-slate-50 border border-slate-200 text-xs rounded-xl px-3 py-1.5 focus:outline-none">
+                <option value="ALL">All Statuses</option>
+                <option value="Scheduled">Scheduled</option>
+                <option value="Checked In">Checked In</option>
+                <option value="In Consultation">In Consultation</option>
+                <option value="Completed">Completed</option>
+              </select>
             </div>
           </div>
 
-          <div class="system-metrics-list">
-            <div class="system-metric-row">
-              <div class="system-metric-label">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                </svg>
-                <span>Total Users</span>
-              </div>
-              <div class="system-metric-val">142</div>
+          <!-- PATIENTS TABLE -->
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-slate-100 text-slate-600 uppercase text-[10px] tracking-wider font-semibold border-b border-slate-200">
+                    <th class="p-3.5">MRN / ID</th>
+                    <th class="p-3.5">Patient Name</th>
+                    <th class="p-3.5">Age / Sex</th>
+                    <th class="p-3.5">Contact</th>
+                    <th class="p-3.5">Assigned Doctor</th>
+                    <th class="p-3.5">Status</th>
+                    <th class="p-3.5 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="patientsTableBody" class="divide-y divide-slate-100">
+                  <!-- Dynamic JS -->
+                </tbody>
+              </table>
             </div>
+          </div>
+        </section>
 
-            <div class="system-metric-row">
-              <div class="system-metric-label">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"></path>
-                  <circle cx="20" cy="10" r="2"></circle>
-                </svg>
-                <span>Doctors</span>
-              </div>
-              <div class="system-metric-val">32</div>
+        <!-- DOCTORS WORKSPACE -->
+        <section id="view-doctors" class="hidden space-y-4">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-slate-800">Doctor Directory</h1>
+              <p class="text-xs text-slate-500">Medical practitioners, OPD room assignments, and schedules</p>
             </div>
+            <button onclick="openModal('doctorModal')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow-sm transition">
+              <i class="fa-solid fa-user-md"></i> Add New Doctor
+            </button>
+          </div>
 
-            <div class="system-metric-row">
-              <div class="system-metric-label">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-                <span>Staff</span>
-              </div>
-              <div class="system-metric-val">78</div>
+          <div id="doctorsGrid" class="flex flex-col gap-2">
+            <!-- Dynamic Cards -->
+          </div>
+        </section>
+
+        <!-- APPOINTMENTS WORKSPACE -->
+        <section id="view-appointments" class="hidden space-y-4">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-slate-800">Appointments Schedule</h1>
+              <p class="text-xs text-slate-500">Book, manage, and map patient consultations</p>
             </div>
+            <button onclick="openModal('appointmentModal')" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow-sm transition">
+              <i class="fa-solid fa-calendar-plus"></i> Book Appointment
+            </button>
+          </div>
 
-            <div class="system-metric-row">
-              <div class="system-metric-label">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M3 21h18"></path>
-                  <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path>
-                </svg>
-                <span>Departments</span>
-              </div>
-              <div class="system-metric-val">8</div>
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-100 text-slate-600 uppercase text-[10px] tracking-wider font-semibold border-b border-slate-200">
+                  <tr>
+                    <th class="p-3.5">Appt ID</th>
+                    <th class="p-3.5">Patient</th>
+                    <th class="p-3.5">Doctor</th>
+                    <th class="p-3.5">Date & Time</th>
+                    <th class="p-3.5">Reason</th>
+                    <th class="p-3.5">Status</th>
+                    <th class="p-3.5 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="appointmentsTableBody" class="divide-y divide-slate-100">
+                  <!-- Dynamic JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- DEPARTMENTS & SERVICES WORKSPACE - Clean List Format -->
+        <section id="view-departments" class="hidden space-y-5">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-slate-800">Departments & Clinical Services</h1>
+              <p class="text-xs text-slate-500">Explore departments, clinical leads, and available services</p>
+            </div>
+            <div class="relative w-full sm:w-64">
+              <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+              <input type="text" id="serviceSearchInput" onkeyup="renderDepartmentsList()" placeholder="Search departments or services..." class="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm">
             </div>
           </div>
 
-          <div class="system-divider"></div>
-
-          <!-- Quick Links -->
-          <div class="quick-links-group">
-            <div class="quick-links-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-              </svg>
-              <span>Quick Links</span>
-            </div>
-
-            <div class="quick-link-row" onclick="showToast('Navigating to Department Management...')">
-              <div style="display:flex; align-items:center; gap:8px;">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
-                  <rect x="3" y="3" width="7" height="7"></rect>
-                  <rect x="14" y="3" width="7" height="7"></rect>
-                  <rect x="14" y="14" width="7" height="7"></rect>
-                  <rect x="3" y="14" width="7" height="7"></rect>
-                </svg>
-                <span>Manage Departments</span>
-              </div>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-
-            <div class="quick-link-row" onclick="showToast('Generating clinical audit reports...')">
-              <div style="display:flex; align-items:center; gap:8px;">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                  <line x1="16" y1="13" x2="8" y2="13"></line>
-                </svg>
-                <span>View Reports</span>
-              </div>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-
-            <div class="quick-link-row" onclick="showToast('Opening MedBuddy System Settings...')">
-              <div style="display:flex; align-items:center; gap:8px;">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
-                  <circle cx="12" cy="12" r="3"></circle>
-                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                </svg>
-                <span>System Settings</span>
-              </div>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
+          <!-- SERVICES & DEPARTMENTS LIST CONTAINER -->
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+            <div id="departmentsListContainer" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 p-4">
+              <!-- Rendered via JS -->
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+
+        <!-- ADMISSIONS & BED MANAGEMENT WORKSPACE -->
+        <section id="view-admissions" class="hidden space-y-4">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-slate-800">Inpatient Bed Management</h1>
+              <p class="text-xs text-slate-500">Real-time room allocation, ward beds, and inpatient tracking</p>
+            </div>
+            <button onclick="openModal('admissionModal')" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow-sm transition">
+              <i class="fa-solid fa-bed"></i> Assign New Inpatient Bed
+            </button>
+          </div>
+
+          <div id="bedsGrid" class="flex flex-col gap-2">
+            <!-- Dynamic Bed Slots -->
+          </div>
+        </section>
+
+        <!-- DIAGNOSTICS REPOSITORY WORKSPACE -->
+        <section id="view-diagnostics" class="hidden space-y-4">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-slate-800">Diagnostics Repository</h1>
+              <p class="text-xs text-slate-500">Laboratory test reports, MRI, X-Ray, and ECG records</p>
+            </div>
+            <button onclick="openModal('diagnosticModal')" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow-sm transition">
+              <i class="fa-solid fa-folder-plus"></i> Publish Lab Report
+            </button>
+          </div>
+
+          <!-- DIAGNOSTICS FILTER CHIPS -->
+          <div class="flex items-center space-x-2 overflow-x-auto pb-1 text-xs">
+            <button onclick="filterLabCategory('ALL')" class="lab-chip bg-slate-800 text-white px-3 py-1 rounded-full font-medium">All Types</button>
+            <button onclick="filterLabCategory('Blood Test')" class="lab-chip bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded-full hover:bg-slate-100 font-medium">Blood Test</button>
+            <button onclick="filterLabCategory('X-Ray')" class="lab-chip bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded-full hover:bg-slate-100 font-medium">X-Ray</button>
+            <button onclick="filterLabCategory('MRI Scan')" class="lab-chip bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded-full hover:bg-slate-100 font-medium">MRI Scan</button>
+            <button onclick="filterLabCategory('ECG')" class="lab-chip bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded-full hover:bg-slate-100 font-medium">ECG</button>
+          </div>
+
+          <div id="labReportsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Dynamic Cards -->
+          </div>
+        </section>
+
+        <!-- BILLING & PAYMENTS WORKSPACE -->
+        <section id="view-billing" class="hidden space-y-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-slate-800">Billing & Payment Gateway</h1>
+              <p class="text-xs text-slate-500">Dynamic invoice generator, UPI payment modes, and printable receipts</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- INVOICE GENERATOR FORM -->
+            <div class="lg:col-span-2 bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 space-y-4">
+              <h3 class="font-bold text-slate-800 text-base border-b border-slate-100 pb-2">New Invoice Calculation Engine</h3>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div>
+                  <label class="block text-slate-600 font-medium mb-1">Select Patient</label>
+                  <select id="billPatientSelect" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-500">
+                    <!-- Dynamic -->
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-slate-600 font-medium mb-1">Payment Mode</label>
+                  <select id="billPaymentMode" onchange="toggleUPICode()" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-500">
+                    <option value="UPI / QR Code">UPI / Instant QR</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Credit / Debit Card">Credit / Debit Card</option>
+                    <option value="Health Insurance Claim">Health Insurance Claim</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- SERVICE CHECKBOX LIST WITH PRICES -->
+              <div class="space-y-2">
+                <label class="block text-xs font-semibold text-slate-700">Select Rendered Medical Services & Tests:</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs border border-slate-200 p-3 rounded-xl max-h-48 overflow-y-auto bg-slate-50/50">
+                  <label class="flex items-center space-x-2 cursor-pointer p-1.5 hover:bg-white rounded-lg transition">
+                    <input type="checkbox" value="300" data-name="OPD Consultation Fee" class="bill-item-chk accent-sky-600" onchange="calculateInvoiceTotal()">
+                    <span>OPD Consultation Fee ($300)</span>
+                  </label>
+                  <label class="flex items-center space-x-2 cursor-pointer p-1.5 hover:bg-white rounded-lg transition">
+                    <input type="checkbox" value="120" data-name="Complete Blood Count (CBC)" class="bill-item-chk accent-sky-600" onchange="calculateInvoiceTotal()">
+                    <span>Blood Count CBC ($120)</span>
+                  </label>
+                  <label class="flex items-center space-x-2 cursor-pointer p-1.5 hover:bg-white rounded-lg transition">
+                    <input type="checkbox" value="250" data-name="Digital Chest X-Ray" class="bill-item-chk accent-sky-600" onchange="calculateInvoiceTotal()">
+                    <span>Chest X-Ray ($250)</span>
+                  </label>
+                  <label class="flex items-center space-x-2 cursor-pointer p-1.5 hover:bg-white rounded-lg transition">
+                    <input type="checkbox" value="650" data-name="Brain MRI Scan" class="bill-item-chk accent-sky-600" onchange="calculateInvoiceTotal()">
+                    <span>MRI Scan ($650)</span>
+                  </label>
+                  <label class="flex items-center space-x-2 cursor-pointer p-1.5 hover:bg-white rounded-lg transition">
+                    <input type="checkbox" value="180" data-name="12-Lead ECG Test" class="bill-item-chk accent-sky-600" onchange="calculateInvoiceTotal()">
+                    <span>ECG Test ($180)</span>
+                  </label>
+                  <label class="flex items-center space-x-2 cursor-pointer p-1.5 hover:bg-white rounded-lg transition">
+                    <input type="checkbox" value="500" data-name="Inpatient ICU Day Charge" class="bill-item-chk accent-sky-600" onchange="calculateInvoiceTotal()">
+                    <span>Inpatient Bed/ICU ($500)</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- DYNAMIC MONEY INPUT FOR MISC -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div>
+                  <label class="block text-slate-600 font-medium mb-1">Additional Medicines / Consumables ($)</label>
+                  <input type="number" id="billMiscAmount" value="0" min="0" oninput="calculateInvoiceTotal()" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+                </div>
+                <div>
+                  <label class="block text-slate-600 font-medium mb-1">Tax / GST (18%)</label>
+                  <input type="text" id="billTaxDisplay" value="$0.00" disabled class="w-full p-2 bg-slate-100 border border-slate-200 rounded-xl font-bold text-slate-700">
+                </div>
+              </div>
+
+              <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                <div>
+                  <span class="text-xs text-slate-500">Total Payable:</span>
+                  <div id="billGrandTotal" class="text-2xl font-extrabold text-sky-700">$0.00</div>
+                </div>
+                <button onclick="generateAndSaveInvoice()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm transition">
+                  <i class="fa-solid fa-file-invoice"></i> Generate Final Invoice
+                </button>
+              </div>
+            </div>
+
+            <!-- UPI QR CODE & PREVIEW SHEET -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
+              <div>
+                <h3 class="font-bold text-slate-800 text-base mb-1">Instant UPI Payment</h3>
+                <p class="text-xs text-slate-500 mb-4">Scan QR code using any UPI payment app to process payment</p>
+                <div id="upiQRContainer" class="flex flex-col items-center justify-center p-4 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+                  <div class="bg-white p-3 rounded-xl shadow-sm mb-2">
+                    <img id="qrCodeImg" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=medbuddy@hospital&pn=MedBuddy%20Hospital" alt="UPI QR" class="w-36 h-36 object-contain">
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-700">UPI ID: medbuddy@hospital</span>
+                  <span class="text-[10px] text-emerald-600 font-semibold mt-1"><i class="fa-solid fa-shield-halved"></i> NABH Secure Gateway</span>
+                </div>
+              </div>
+
+              <div class="space-y-2 border-t border-slate-100 pt-3">
+                <span class="text-xs font-bold text-slate-700">Recent Transactions</span>
+                <div id="recentInvoicesList" class="space-y-2 text-xs max-h-40 overflow-y-auto">
+                  <!-- Dynamic JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- USERS & STAFF WORKSPACE -->
+        <section id="view-users" class="hidden space-y-4">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-slate-800">Users & Staff Accounts</h1>
+              <p class="text-xs text-slate-500">Hospital staff, role access control, and account status</p>
+            </div>
+            <button onclick="openModal('userModal')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow-sm transition">
+              <i class="fa-solid fa-user-gear"></i> Create New Staff User
+            </button>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-100 text-slate-600 uppercase text-[10px] tracking-wider font-semibold border-b border-slate-200">
+                  <tr>
+                    <th class="p-3.5">User ID</th>
+                    <th class="p-3.5">Full Name</th>
+                    <th class="p-3.5">Role</th>
+                    <th class="p-3.5">Email & Contact</th>
+                    <th class="p-3.5">Status</th>
+                    <th class="p-3.5 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody" class="divide-y divide-slate-100">
+                  <!-- Dynamic JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- SYSTEM SETTINGS WORKSPACE -->
+        <section id="view-settings" class="hidden space-y-6">
+          <div>
+            <h1 class="text-2xl font-extrabold text-slate-800">System Settings</h1>
+            <p class="text-xs text-slate-500">Hospital parameters, system data backup, and administrator profile</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- HOSPITAL CONFIG -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 space-y-4">
+              <h3 class="font-bold text-slate-800 text-base border-b border-slate-100 pb-2">Hospital Organization Details</h3>
+              <div class="space-y-3 text-xs">
+                <div>
+                  <label class="block font-medium text-slate-600 mb-1">Hospital Name</label>
+                  <input type="text" id="settingHospName" value="MedBuddy Central Hospital" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+                </div>
+                <div>
+                  <label class="block font-medium text-slate-600 mb-1">Admin Display Name</label>
+                  <input type="text" id="settingAdminName" value="Dr. Alex Danvers" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+                </div>
+                <button onclick="saveSettings()" class="bg-sky-600 text-white px-4 py-2 rounded-xl font-semibold hover:bg-sky-700 transition">
+                  Save Changes
+                </button>
+              </div>
+            </div>
+
+            <!-- DATA BACKUP & RESTORE -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 space-y-4">
+              <h3 class="font-bold text-slate-800 text-base border-b border-slate-100 pb-2">Data Persistence Management</h3>
+              <p class="text-xs text-slate-500">Export complete hospital workspace data to JSON or restore defaults.</p>
+              <div class="flex flex-wrap gap-2">
+                <button onclick="exportDataJSON()" class="bg-slate-800 text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-slate-900 flex items-center gap-1.5 transition">
+                  <i class="fa-solid fa-download"></i> Export Data JSON
+                </button>
+                <button onclick="resetDataToDefault()" class="bg-rose-600 text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-rose-700 flex items-center gap-1.5 transition">
+                  <i class="fa-solid fa-trash-arrow-up"></i> Reset Sample Data
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
   </div>
 
-  <!-- ==========================================================================
-       Interactive Quick Action Modal
-       ========================================================================== -->
-  <div class="admin-modal-overlay" id="quickActionModal">
-    <div class="admin-modal-card">
-      <div class="admin-modal-header">
-        <h3 id="quickModalTitle">Quick Action</h3>
-        <button class="admin-modal-close" onclick="closeQuickModal()">✕</button>
-      </div>
-      <div class="admin-modal-body">
-        <div id="quickModalDynamicFields"></div>
-        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:10px;">
-          <button style="background:transparent; border:1px solid #e2e8f0; padding:8px 16px; border-radius:6px; cursor:pointer;" onclick="closeQuickModal()">Cancel</button>
-          <button class="btn-action-primary" style="padding:8px 18px;" onclick="submitQuickAction()">Save & Record</button>
+  <!-- PRINTABLE MODAL FOR INVOICES & REPORTS -->
+  <div id="printModal" class="hidden fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 overflow-y-auto backdrop-blur-sm">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden my-8">
+      <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center no-print">
+        <span class="font-bold text-sm text-slate-700">Official Document Preview</span>
+        <div class="flex items-center gap-2">
+          <button onclick="window.print()" class="bg-sky-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-sky-700 transition">
+            <i class="fa-solid fa-print"></i> Print Document
+          </button>
+          <button onclick="closeModal('printModal')" class="bg-slate-200 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-slate-300 transition">Close</button>
         </div>
+      </div>
+      <div id="printableArea" class="p-8 space-y-6 bg-white text-slate-800">
+        <!-- Dynamic printable content injected here -->
       </div>
     </div>
   </div>
 
-  <!-- Toast Container -->
-  <div id="adminToastContainer" style="position:fixed; bottom:24px; right:24px; z-index:200; display:flex; flex-direction:column; gap:8px;"></div>
+  <!-- GENERIC MODALS FOR CREATING RECORDS -->
 
-  <!-- Interactive JavaScript Engine -->
-  <script src="admin.js"></script>
+  <!-- QUICK ADMIT / REGISTER PATIENT MODAL -->
+  <div id="patientModal" class="hidden fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-5 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+        <h3 class="font-bold text-slate-800">New Patient Registration</h3>
+        <button onclick="closeModal('patientModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="patientForm" onsubmit="savePatient(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Full Patient Name</label>
+          <input type="text" id="pFormName" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-medium mb-1 text-slate-600">Age</label>
+            <input type="number" id="pFormAge" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+          </div>
+          <div>
+            <label class="block font-medium mb-1 text-slate-600">Gender</label>
+            <select id="pFormGender" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Contact Phone</label>
+          <input type="text" id="pFormPhone" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+        </div>
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Assigned Department</label>
+          <select id="pFormDept" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+            <option>Cardiology</option>
+            <option>General Medicine</option>
+            <option>Orthopedics</option>
+            <option>Neurology</option>
+            <option>Pediatrics</option>
+            <option>Radiology</option>
+            <option>Dermatology & Cosmetology</option>
+            <option>Gastroenterology</option>
+            <option>Oncology & Cancer Care</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Initial Status</label>
+          <select id="pFormStatus" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+            <option>Scheduled</option>
+            <option>Checked In</option>
+            <option>In Consultation</option>
+          </select>
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeModal('patientModal')" class="px-3 py-1.5 border border-slate-200 rounded-xl text-slate-600">Cancel</button>
+          <button type="submit" class="px-4 py-1.5 bg-sky-600 text-white font-bold rounded-xl hover:bg-sky-700 transition">Save Patient</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- APPOINTMENT MODAL -->
+  <div id="appointmentModal" class="hidden fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-5 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+        <h3 class="font-bold text-slate-800">Schedule Appointment</h3>
+        <button onclick="closeModal('appointmentModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="appointmentForm" onsubmit="saveAppointment(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Patient</label>
+          <select id="appPatientSelect" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl"></select>
+        </div>
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Doctor</label>
+          <select id="appDoctorSelect" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl"></select>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-medium mb-1 text-slate-600">Date</label>
+            <input type="date" id="appDate" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+          </div>
+          <div>
+            <label class="block font-medium mb-1 text-slate-600">Time Slot</label>
+            <input type="time" id="appTime" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Consultation Reason</label>
+          <input type="text" id="appReason" placeholder="e.g. Routine Checkup, Cardiac Follow-up" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeModal('appointmentModal')" class="px-3 py-1.5 border border-slate-200 rounded-xl text-slate-600">Cancel</button>
+          <button type="submit" class="px-4 py-1.5 bg-purple-600 text-white font-bold rounded-xl hover:bg-purple-700 transition">Confirm Booking</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DOCTOR MODAL -->
+  <div id="doctorModal" class="hidden fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-5 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+        <h3 class="font-bold text-slate-800">Add Doctor Profile</h3>
+        <button onclick="closeModal('doctorModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="doctorForm" onsubmit="saveDoctor(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Doctor Full Name</label>
+          <input type="text" id="docName" placeholder="Dr. Sarah Connor" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+        </div>
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Specialty / Department</label>
+          <select id="docSpecialty" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+            <option>Cardiology</option>
+            <option>Neurology</option>
+            <option>Orthopedics</option>
+            <option>General Medicine</option>
+            <option>Pediatrics</option>
+            <option>Radiology</option>
+            <option>Dermatology & Cosmetology</option>
+            <option>Gastroenterology</option>
+            <option>Oncology & Cancer Care</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">OPD Room No.</label>
+          <input type="text" id="docRoom" placeholder="Room 102" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeModal('doctorModal')" class="px-3 py-1.5 border border-slate-200 rounded-xl text-slate-600">Cancel</button>
+          <button type="submit" class="px-4 py-1.5 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">Add Doctor</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DIAGNOSTIC PUBLISH MODAL -->
+  <div id="diagnosticModal" class="hidden fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-5 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+        <h3 class="font-bold text-slate-800">Publish Lab Diagnostic Report</h3>
+        <button onclick="closeModal('diagnosticModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="diagnosticForm" onsubmit="saveDiagnosticReport(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Patient</label>
+          <select id="diagPatientSelect" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl"></select>
+        </div>
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Report Test Type</label>
+          <select id="diagType" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+            <option>Blood Test</option>
+            <option>X-Ray</option>
+            <option>MRI Scan</option>
+            <option>ECG</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Diagnostic Observations / Results</label>
+          <textarea id="diagResult" rows="3" required placeholder="Normal sinus rhythm / Clear lungs..." class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl"></textarea>
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeModal('diagnosticModal')" class="px-3 py-1.5 border border-slate-200 rounded-xl text-slate-600">Cancel</button>
+          <button type="submit" class="px-4 py-1.5 bg-cyan-600 text-white font-bold rounded-xl hover:bg-cyan-700 transition">Publish Report</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- USER CREATION MODAL -->
+  <div id="userModal" class="hidden fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-5 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+        <h3 class="font-bold text-slate-800">Create Staff User Account</h3>
+        <button onclick="closeModal('userModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="userForm" onsubmit="saveUserAccount(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Full Name</label>
+          <input type="text" id="uName" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+        </div>
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Assigned System Role</label>
+          <select id="uRole" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+            <option>Administrator</option>
+            <option>Doctor</option>
+            <option>Nurse Practitioner</option>
+            <option>Receptionist</option>
+            <option>Lab Technician</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Email Address</label>
+          <input type="email" id="uEmail" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeModal('userModal')" class="px-3 py-1.5 border border-slate-200 rounded-xl text-slate-600">Cancel</button>
+          <button type="submit" class="px-4 py-1.5 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition">Create Account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADMISSION MODAL -->
+  <div id="admissionModal" class="hidden fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-5 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+        <h3 class="font-bold text-slate-800">Assign Inpatient Bed</h3>
+        <button onclick="closeModal('admissionModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="admissionForm" onsubmit="saveAdmission(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium mb-1 text-slate-600">Select Patient</label>
+          <select id="admPatientSelect" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl"></select>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-medium mb-1 text-slate-600">Ward</label>
+            <select id="admWard" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+              <option>General Ward</option>
+              <option>ICU</option>
+              <option>Cardiac Wing</option>
+              <option>Pediatric Ward</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-medium mb-1 text-slate-600">Bed Number</label>
+            <input type="text" id="admBedNo" placeholder="B-104" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl">
+          </div>
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeModal('admissionModal')" class="px-3 py-1.5 border border-slate-200 rounded-xl text-slate-600">Cancel</button>
+          <button type="submit" class="px-4 py-1.5 bg-teal-600 text-white font-bold rounded-xl hover:bg-teal-700 transition">Assign Bed</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toastContainer" class="fixed bottom-4 right-4 z-50 space-y-2 pointer-events-none"></div>
+
+  <!-- DYNAMIC JAVASCRIPT ENGINE -->
+    <script src="medbuddy.js"></script>
 </body>
 </html>
